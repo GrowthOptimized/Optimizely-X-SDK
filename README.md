@@ -1,13 +1,9 @@
-# Optimizely PHP SDK
-[![Packagist](https://img.shields.io/packagist/v/GrowthOptimized/Optimizely-SDK.svg?maxAge=2592000?style=flat-square)](https://packagist.org/packages/growthoptimized/optimizely-sdk)
-[![Travis](https://img.shields.io/travis/GrowthOptimized/Optimizely-SDK/master.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/GrowthOptimized/Optimizely-SDK)
-
-PHP Wrapper to interact with the Optimizely API.
+PHP Wrapper to interact with the Optimizely X API.
 
 ## Installation
 
 ```bash
-composer require growthoptimized/optimizely-sdk
+composer require growthoptimized/optimizely-x-sdk
 ```
 
 ## Usage
