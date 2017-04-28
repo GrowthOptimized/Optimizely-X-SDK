@@ -4,20 +4,18 @@ namespace GrowthOptimized;
 
 use GuzzleHttp\ClientInterface;
 use GrowthOptimized\Adapters\AudiencesAdapter;
-use GrowthOptimized\Adapters\DimensionsAdapter;
 use GrowthOptimized\Adapters\ExperimentsAdapter;
-use GrowthOptimized\Adapters\GoalsAdapter;
 use GrowthOptimized\Adapters\ProjectsAdapter;
-use GrowthOptimized\Adapters\SchedulesAdapter;
-use GrowthOptimized\Adapters\UploadedListsAdapter;
-use GrowthOptimized\Adapters\VariationsAdapter;
+use GrowthOptimized\Adapters\CampaignsAdapter;
+use GrowthOptimized\Adapters\PagesAdapter;
+use GrowthOptimized\Adapters\EventsAdapter;
 use GrowthOptimized\Http\Client;
 
 /**
  * Class Optimizely
  * @package GrowthOptimized
  */
-class Optimizely
+class OptimizelyX
 {
     /**
      * Optimizely API endpoint
@@ -43,14 +41,10 @@ class Optimizely
      * @param bool $oauth
      * @return static
      */
-    public static function create($token, $oauth = false)
+    public static function create($token)
     {
+        
         $headers = ['Content-Type' => 'application/json', 'Authorization' => "Bearer {$token}"];
-
-        if(!$oauth) {
-            $headers['Token'] = $token;
-            unset($headers['Authorization']);
-        }
 
         $client = new Client([
             'base_uri' => self::BASE_URI,
@@ -78,6 +72,15 @@ class Optimizely
     }
 
     /**
+     * @param null $campaignId
+     * @return $this
+     */
+    public function campaign($campaignId)
+    {
+        return new CampaignsAdapter($this->client, $campaignId);
+    }
+
+    /**
      * @param $experimentId
      * @return ExperimentsAdapter
      */
@@ -92,57 +95,6 @@ class Optimizely
     public function experiments()
     {
         return new ExperimentsAdapter($this->client);
-    }
-
-    /**
-     * @param $scheduleId
-     * @return SchedulesAdapter
-     */
-    public function schedule($scheduleId)
-    {
-        return new SchedulesAdapter($this->client, $scheduleId);
-    }
-
-    /**
-     * @return string
-     */
-    public function schedules()
-    {
-        return new SchedulesAdapter($this->client);
-    }
-
-    /**
-     * @param $variationId
-     * @return VariationsAdapter
-     */
-    public function variation($variationId)
-    {
-        return new VariationsAdapter($this->client, $variationId);
-    }
-
-    /**
-     * @return string
-     */
-    public function variations()
-    {
-        return new VariationsAdapter($this->client);
-    }
-
-    /**
-     * @param $goalId
-     * @return GoalsAdapter
-     */
-    public function goal($goalId)
-    {
-        return new GoalsAdapter($this->client, $goalId);
-    }
-
-    /**
-     * @return string
-     */
-    public function goals()
-    {
-        return new GoalsAdapter($this->client);
     }
 
     /**
@@ -163,36 +115,21 @@ class Optimizely
     }
 
     /**
-     * @param $uploadedListId
-     * @return UploadedListsAdapter
+     * @param $pageId
+     * @return PagesAdapter
      */
-    public function uploadedList($uploadedListId)
+    public function page($pageId)
     {
-        return new UploadedListsAdapter($this->client, $uploadedListId);
+        return new PagesAdapter($this->client, $pageId);
     }
 
-    /**
-     * @return string
+        /**
+     * @param $eventId
+     * @return EventAdapter
      */
-    public function uploadedLists()
+    public function event($eventId)
     {
-        return new UploadedListsAdapter($this->client);
+        return new EventsAdapter($this->client, $eventId);
     }
 
-    /**
-     * @param $dimensionId
-     * @return DimensionsAdapter
-     */
-    public function dimension($dimensionId)
-    {
-        return new DimensionsAdapter($this->client, $dimensionId);
-    }
-
-    /**
-     * @return string
-     */
-    public function dimensions()
-    {
-        return new DimensionsAdapter($this->client);
-    }
 }

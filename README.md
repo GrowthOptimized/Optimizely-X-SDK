@@ -22,228 +22,312 @@ $optimizely = Optimizely::create($token, true);
 
 ### Projects
 
+List projects
+
 ```php
-// Read a project
-$optimizely->projects()->find($projectId);
-
-// Create a project
-$optimizely->projects()->create([
-    'project_name' => 'My new project'
-]);
-
-// Update a project
-$optimizely->projects()->update($projectId, [
-    'project_name' => 'My new name'
-]);
-
-// Delete a project
-// Not supported by Optimizely Rest API
-
-// List projects in account
 $optimizely->projects()->all();
+```
 
-// Activate a project
-$optimizely->projects()->activate($projectId);
+Read a project
 
-// Archive a project
-$optimizely->projects()->archive($projectId);
+```php
+$optimizely->projects()->find($projectId);
+```
+
+Create a project
+
+```php
+$optimizely->projects()->create([
+    'name' => 'My new project'
+]);
+```
+
+Update a project
+
+```php
+$optimizely->project($projectId)->update([
+    'name' => 'My new name'
+]);
+```
+
+Delete a project
+
+** Not supported by Optimizely X Rest API **
+
+Activate a project (note: not functional, waiting on optimizely X api fix)
+
+```php
+$optimizely->project($projectId)->activate();
+```
+
+Archive a project (note: not functional, waiting on optimizely X api fix)
+
+```php
+$optimizely->project($projectId)->archive();
+```
+
+### Campaigns
+
+List Campaigns
+
+```php
+$optimizely->project($projectId)->campaigns();
+```
+
+Find Campaign
+
+```php
+$optimizely->campaign($campaignId)->find();
+```
+
+Create Campaign
+
+```php
+$optimizely->project($projectId)->createCampaign(
+    'Landing Page Optimization', 
+    ["status": "not_started"]
+);
+```
+
+Update a campaign 
+
+```php
+$optimizely->campaign($campaignId)->update([
+    'name' => 'this is my new campaign'
+]);
 ```
 
 ### Experiments
 
+List experiments in project
+
 ```php
-// List experiments in project
 $optimizely->project($projectId)->experiments();
+```
 
-// Create an experiment
-$optimizely->project($projectId)->createExperiment(
-    'Google',
-    'google.com',
-    ['status' => 'Paused']
-);
+Find experiment 
 
-// Update an experiment
-$optimizely->experiment($experimentId)->update(['edit_url' => 'newsite.com']);
+```php
+$optimizely->experiment($experimentId)->find();
+```
 
-// Launch an experiment
-$optimizely->experiment($experimentId)->launch();
+Create an experiment
 
-// Pause an experiment
-$optimizely->experiment($experimentId)->pause();
+```php
+$optimizely->project($projectId)->createExperiment('my test', [
+    "variations" => [
+        [
+            "name" => "control",
+            "weight" => 5000
+        ],
+        [
+            "name" => "varA",
+            "weight" => 5000
+        ]
+    ],
+    "metrics" => [
+        [
+            "aggregator" => "unique",
+            "event_id" => 0,
+            "field" => "revenue"
+        ]
+    ]
+]);
+```
 
-// Resume an experiment
-$optimizely->experiment($experimentId)->resume();
 
-// Archive an experiment
+Update an experiment
+
+```php
+$optimizely->experiment($experimentId)->update(['name' => 'newsite.com']);
+```
+
+Delete an experiment
+
+```php
+$optimizely->experiment($experimentId)->delete();
+```php
+
+Archive an experiment
+
+```php
 $optimizely->experiment($experimentId)->archive();
 ```
 
 ### Variations
 
-```php
-// Fetch variations for a given experiment
-$optimizely->experiment($experimentId)->variations();
 
-// Create variation
-$optimizely->experiment($experimentId)->createVariations('varA', [
-    'weight' => 25
+Change Variations
+
+```php
+$optimizely->experiment($experimentId)->changeVariations([
+    [
+        "name" => "control",
+        "weight" => 5000
+    ],
+    [
+        "name" => "varA",
+        "weight" => 5000
+    ]
 ]);
-
-// Find a variation
-$optimizely->variations()->find($variationId);
-
-// Update a variation
-$optimizely->variation($variationId)->update(['description' => 'Control']);
-
-// Update variation description
-$optimizely->variation($variationId)->description('Variation A');
-
-// Update variation weight
-$optimizely->variation($variationId)->weight(5000);
-
-// Update variation JS component
-$optimizely->variation($variationId)->js_component('$(".selector")');
-
-// Pause variation
-$optimizely->variation($variationId)->pause();
-
-// Resume variation
-$optimizely->variation($variationId)->resume();
-
-// Delete a variation
-$optimizely->variation($variationId)->delete();
-```
-
-### Results
-
-```php
-// Fetch the results of an experiments
-$optimizely->experiment($experimentId)->results();
-
-// Fetch the results of an experiments (legacy version)
-$optimizely->experiment($experimentId)->legacyResults();
-```
-
-### Schedules
-
-```php
-// Find a schedule
-$optimizely->schedules()->find($scheduleId);
-
-// Update schedule
-$optimizely->schedule($scheduleId)->update(
-    Carbon::now()->addDays(30),
-    Carbon::now()->addDays(60)
-);
-
-// Update start time of a given schedule
-$optimizely->schedule($scheduleId)->startAt(Carbon::now()->addDays(30));
-
-// Update stop time of a given schedule
-$optimizely->schedule($scheduleId)->stopAt(Carbon::now()->addDays(30));
-
-// List schedules for an experiment
-$optimizely->experiment($experimentId)->schedules();
-
-// List active schedules for an experiment
-$optimizely->experiment($experimentId)->schedules()->active();
-
-// List inactive schedules for an experiment
-$optimizely->experiment($experimentId)->schedules()->inactive();
-
-// Create a schedule for an experiment
-$optimizely->experiment($experimentId)->schedule(Carbon::now()->addDays(10));
-
-// Start an experiment at a given time
-$optimizely->experiment($experimentId)->startAt(Carbon::now()->addDays(10));
-
-// Stop an experiment at a given time
-$optimizely->experiment($experimentId)->stopAt(Carbon::now()->addDays(10));
-
-// Delete a schedule
-$optimizely->schedule($scheduleId)->delete();
 ```
 
 ### Audiences
 
+List audiences
+
 ```php
-// List audiences in project
 $optimizely->project($projectId)->audiences();
+```
 
-// Find an audience
-$optimizely->audiences()->find($audienceId);
+Find an audience
 
-// Create an audience
-$optimizely->project($projectId)->createAudience('My second audience');
+```php
+$optimizely->audience($audienceId)->find();
+```
 
-// Update an audience
+Create an audience / NOT WORKING
+
+```php 
+$optimizely->project($projectId)->createAudience(
+    'My second audience', 
+    '[\"and\", {\"type\": \"language\", \"value\": \"es\"}, {\"type\": \"location\", \"value\": \"US-CA-SANFRANCISCO\"}]',
+    ["description" => 'People that speak spanish in San Fran']
+);
+```
+
+Update an audience
+
+```php
 $optimizely->audience($audienceId)->update([
     'name' => 'My new name'
 ]);
-
-// Delete an audience
-// Not supported by Optimizely Rest API
 ```
 
-### Goals
+Delete an audience
+
+** Not supported by Optimizely X Rest API **
+
+### Pages
+
+List Pages
 
 ```php
-// List goals in project
-$optimizely->project($projectId)->goals();
-
-// Find a goal
-$optimizely->goals()->find($goalId);
-
-// Create a goal in a project
-$optimizely->project($projectId)->createGoal('My new goal', 1, [
-    'event' => 'My event'
-]);
-
-// Delete a goal
-$optimizely->goal($goalId)->delete();
+$optimizely->project($projectId)->pages();
 ```
 
-### Dimensions
+Find a Page
 
 ```php
-// List dimensions in a project
-$optimizely->project($projectId)->dimensions();
-
-// Find a dimension
-$optimizely->dimensions()->find($dimensionId);
-
-// Create a dimension
-$optimizely->project($projectId)->createDimension('My dimension');
-
-// Update a dimension
-$optimizely->dimension($dimensionId)->update([
-    'name' => 'My new dimension name'
-]);
-
-// Delete a dimension
-$optimizely->dimension($dimensionId)->delete();
+$optimizely->page($pageId)->find();
 ```
 
-### Uploaded Lists
+Create a page
 
 ```php
-// List uploaded lists in project
-$optimizely->project($projectId)->uploadedLists();
-
-// Find a uploaded list
-$optimizely->uploadedLists()->find($uploadedListId);
-
-// Create an uploaded list
-$optimizely->project($projectId)->createUploadedList(
-    'List', UploadedList::TYPE_QUERY_STRING, 'csv',
-    'user_id', 'uid1,uid2,uid3,uid4'
-);
-
-// Update an uploaded list
-$optimizely->uploadedList($uploadedListId)->update([
-    'key_fields' => 'user_uid'
+$optimizely->project($projectId)->createPage($name, $edit_url, [
+    'category' => 'article'
 ]);
+```
 
-// Delete an uploaded list
-$optimizely->uploadedList($uploadedListId)->delete();
+Update a page
+
+```php
+$optimizely->page($pageId)->update(['name' => 'my updated name']);
+```
+
+Delete a page 
+
+```php
+$optimizely->page($pageId)->delete();
+```
+
+### Events
+
+List Events
+
+```php
+$optimizely->project($projectId)->events();
+```
+
+Find Event
+
+```php
+$optimizely->event($eventId)->find();
+```
+
+#### In Page Events
+
+Create In-page Event
+
+```php
+$optimizely->page($pageId)->createEvent(
+    'my sign up goal', 
+    'click', 
+    ['selector' => '.sign-up-btn'],
+    ['category' => 'sign_up']
+)
+```
+
+Update In-Page Event
+
+```php
+$optimizely->page($pageId)->event($inPageEventId)->update([
+    'name' => 'my new page event name'
+]);
+```
+
+Delete In-Page Event
+
+```php
+$optimizely->page($pageId)->event($inPageEventId)->delete();
+```
+
+#### Custom Event
+
+Create Custom Event
+
+```php
+$optimizely->project($projectId)->createCustomEvent([
+    'event_type' => 'custom',
+    'name' => 'my custom event',
+    'key' => 'my_event_key'
+]);
+```
+
+Update Custom Event
+
+```php
+$optimizely->project($projectId)->event($customEventId)->update([
+    'name' => 'my new custom event name'
+]);
+```
+
+Delete Custom Event
+
+```php
+$optimizely->project($projectId)->event($customEventId)->delete();
+```
+
+### Attributes
+
+List Attributes
+
+```php
+$optimizely->project($projectId)->attributes();
+```
+
+
+### Results
+
+Fetch the results of an experiment
+
+```php
+$optimizely->experiment($experimentId)->results();
+```
+
+Fetch the results of an campaign
+
+```php
+$optimizely->campaign($campaignId)->results();
 ```

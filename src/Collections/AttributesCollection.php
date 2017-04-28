@@ -2,13 +2,13 @@
 
 namespace GrowthOptimized\Collections;
 
-use GrowthOptimized\Items\Dimension;
+use GrowthOptimized\Items\Attribute;
 
 /**
- * Class DimensionCollection
+ * Class AudienceCollection
  * @package GrowthOptimized\Collections
  */
-class DimensionCollection extends CollectionAbstract
+class AttributesCollection extends CollectionAbstract
 {
     /**
      * @param $json
@@ -22,8 +22,8 @@ class DimensionCollection extends CollectionAbstract
 
         $collection = new static($json);
 
-        return $collection->transform(function ($dimension) {
-            return new Dimension($dimension);
+        return $collection->transform(function ($audience) {
+            return new Attribute($audience);
         });
     }
 }

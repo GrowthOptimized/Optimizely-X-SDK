@@ -2,13 +2,13 @@
 
 namespace GrowthOptimized\Collections;
 
-use GrowthOptimized\Items\Goal;
+use GrowthOptimized\Items\Page;
 
 /**
- * Class GoalCollection
+ * Class ResultCollection
  * @package GrowthOptimized\Collections
  */
-class GoalCollection extends CollectionAbstract
+class PagesCollection extends CollectionAbstract
 {
     /**
      * @param $json
@@ -22,8 +22,8 @@ class GoalCollection extends CollectionAbstract
 
         $collection = new static($json);
 
-        return $collection->transform(function ($goal) {
-            return new Goal($goal);
+        return $collection->transform(function ($result) {
+            return new Page($result);
         });
     }
 }

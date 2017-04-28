@@ -14,12 +14,9 @@ class AudiencesAdapter extends AdapterAbstract
      * @param $audienceId
      * @return static
      */
-    public function find($audienceId = null)
+    public function find()
     {
-        $this->setResourceId($audienceId);
-
         $response = $this->client->get("audiences/{$this->getResourceId()}");
-
         return Audience::createFromJson($response->getBody()->getContents());
     }
 
@@ -29,8 +26,9 @@ class AudiencesAdapter extends AdapterAbstract
      */
     public function update(array $attributes)
     {
-        $response = $this->client->put("audiences/{$this->getResourceId()}", $attributes);
+        $response = $this->client->patch("audiences/{$this->getResourceId()}", $attributes);
 
         return Audience::createFromJson($response->getBody()->getContents());
     }
+
 }

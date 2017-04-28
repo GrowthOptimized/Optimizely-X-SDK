@@ -9,6 +9,6 @@ namespace GrowthOptimized\Items;
 class Project extends ItemAbstract
 {
     // Statuses
-    const STATUS_ACTIVE = 'Active';
-    const STATUS_ARCHIVED = 'Archived';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_ARCHIVED = 'archived';
 }

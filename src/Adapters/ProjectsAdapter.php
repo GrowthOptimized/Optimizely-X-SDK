@@ -2,18 +2,21 @@
 
 namespace GrowthOptimized\Adapters;
 
+use GrowthOptimized\Adapters\EventsAdapter;
+
 use GrowthOptimized\Collections\AudienceCollection;
-use GrowthOptimized\Collections\DimensionCollection;
 use GrowthOptimized\Collections\ExperimentCollection;
-use GrowthOptimized\Collections\GoalCollection;
 use GrowthOptimized\Collections\ProjectCollection;
-use GrowthOptimized\Collections\UploadedListCollection;
+use GrowthOptimized\Collections\CampaignsCollection;
+use GrowthOptimized\Collections\PagesCollection;
+use GrowthOptimized\Collections\EventsCollection;
+use GrowthOptimized\Collections\AttributesCollection;
 use GrowthOptimized\Items\Audience;
-use GrowthOptimized\Items\Dimension;
 use GrowthOptimized\Items\Experiment;
-use GrowthOptimized\Items\Goal;
 use GrowthOptimized\Items\Project;
-use GrowthOptimized\Items\UploadedList;
+use GrowthOptimized\Items\Campaign;
+use GrowthOptimized\Items\Page;
+use GrowthOptimized\Items\Event;
 
 /**
  * Class ProjectsAdapter
@@ -21,13 +24,12 @@ use GrowthOptimized\Items\UploadedList;
  */
 class ProjectsAdapter extends AdapterAbstract
 {
-    /**
-     * @return string
-     */
+    // /**
+    //  * @return mixed
+    //  */
     public function all()
     {
         $response = $this->client->get('projects');
-
         return ProjectCollection::createFromJson($response->getBody()->getContents());
     }
 
@@ -45,12 +47,26 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
+     * @param $project_name
+     * @param array $attributes
+     * @return Project
+     */
+    public function create(string $name, array $attributes = [])
+    {
+        $attributes = array_merge($attributes, compact('name'));
+
+        $response = $this->client->post('projects', $attributes);
+
+        return Project::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
      * @return ProjectsAdapter
      */
     public function activate()
     {
         return $this->update([
-            'project_status' => Project::STATUS_ACTIVE
+            'status' => Project::STATUS_ACTIVE
         ]);
     }
 
@@ -60,48 +76,19 @@ class ProjectsAdapter extends AdapterAbstract
      */
     public function update(array $attributes)
     {
-        $response = $this->client->put("projects/{$this->getResourceId()}", $attributes);
+        $response = $this->client->patch("projects/{$this->getResourceId()}", $attributes);
 
         return Project::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @return ProjectsAdapter
+     * @return static
      */
     public function archive()
     {
         return $this->update([
-            'project_status' => Project::STATUS_ARCHIVED
+            'status' => Project::STATUS_ARCHIVED
         ]);
-    }
-
-    /**
-     * @param $project_name
-     * @param array $attributes
-     * @return Project
-     */
-    public function create($project_name, array $attributes = [])
-    {
-        $attributes = array_merge($attributes, compact('project_name'));
-
-        $response = $this->client->post('projects', $attributes);
-
-        return Project::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $description
-     * @param $edit_url
-     * @param array $attributes
-     * @return static
-     */
-    public function createExperiment($description, $edit_url, array $attributes = [])
-    {
-        $attributes = array_merge($attributes, compact('description', 'edit_url'));
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/experiments", $attributes);
-
-        return Experiment::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -109,123 +96,151 @@ class ProjectsAdapter extends AdapterAbstract
      */
     public function experiments()
     {
-        $response = $this->client->get("projects/{$this->getResourceId()}/experiments");
-
+        $response = $this->client->get("experiments?project_id={$this->getResourceId()}");
         return ExperimentCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
      * @param $name
-     * @param string $description
      * @param array $attributes
      * @return static
      */
-    public function createAudience($name, $description = '', array $attributes = [])
+    public function createExperiment(string $name, array $attributes = [])
     {
-        $attributes = array_merge($attributes, compact('name', 'description'));
+        $project_id = $this->getResourceId();
 
-        $response = $this->client->post("projects/{$this->getResourceId()}/audiences", $attributes);
+        $attributes = array_merge($attributes, compact('name', 'project_id'));
 
-        return Audience::createFromJson($response->getBody()->getContents());
+        $response = $this->client->post("experiments", $attributes);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function campaigns()
+    {
+        $response = $this->client->get("campaigns?project_id={$this->getResourceId()}");
+        return CampaignsCollection::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @param $name
+     * @param array $attributes
+     * @return static
+     */
+    public function createCampaign(string $name, array $attributes = [])
+    {
+        $project_id = $this->getResourceId();
+
+        $attributes = array_merge($attributes, compact('name', 'project_id'));
+
+        $response = $this->client->post("campaigns", $attributes);
+
+        return Campaign::createFromJson($response->getBody()->getContents());
     }
 
     /**
      * @param $projectId
      * @return mixed
      */
-    public function audiences($projectId = null)
+    public function audiences()
     {
-        $this->setResourceId($projectId);
-
-        $response = $this->client->get("projects/{$this->getResourceId()}/audiences");
+        $response = $this->client->get("audiences?project_id={$this->getResourceId()}");
 
         return AudienceCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @param $title
-     * @param $goal_type
+     * @param string $name
+     * @param string $conditions
      * @param array $attributes
      * @return static
      */
-    public function createGoal($title, $goal_type, array $attributes = [])
+    public function createAudience(string $name, string $conditions, array $attributes = [])
     {
-        $attributes = array_merge($attributes, compact('title', 'goal_type'));
+        $project_id = $this->getResourceId();
 
-        $response = $this->client->post("projects/{$this->getResourceId()}/goals", $attributes);
+        $attributes = array_merge($attributes, compact('name', 'conditions', 'project_id'));
 
-        return Goal::createFromJson($response->getBody()->getContents());
+        $reponse = $this->client->post("audiences", $attributes); 
+
+        return Audience::createFromJson($response->getBody()->getContents());   
     }
+
 
     /**
      * @param $projectId
      * @return mixed
      */
-    public function goals($projectId = null)
+    public function pages()
     {
-        $this->setResourceId($projectId);
+        $response = $this->client->get("pages?project_id={$this->getResourceId()}");
 
-        $response = $this->client->get("projects/{$this->getResourceId()}/goals");
-
-        return GoalCollection::createFromJson($response->getBody()->getContents());
+        return PagesCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @param $name
-     * @param string $description
-     * @param string $client_api_name
-     * @return static
-     */
-    public function createDimension($name, $description = '', $client_api_name = '')
-    {
-        $attributes = compact('name', 'description', 'client_api_name');
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/dimensions", $attributes);
-
-        return Dimension::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $projectId
-     * @return mixed
-     */
-    public function dimensions($projectId = null)
-    {
-        $this->setResourceId($projectId);
-
-        $response = $this->client->get("projects/{$this->getResourceId()}/dimensions");
-
-        return DimensionCollection::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $name
-     * @param $type
-     * @param $format
-     * @param $key_fields
-     * @param $list_content
+     * @param string $name
+     * @param string $edit_url
      * @param array $attributes
      * @return static
      */
-    public function createUploadedList($name, $type, $format, $key_fields, $list_content, array $attributes = [])
+    public function createPage(string $name, string $edit_url, array $attributes = [])
     {
-        $attributes = array_merge($attributes, compact('name', 'type', 'format', 'key_fields', 'list_content'));
+        $project_id = $this->getResourceId();
 
-        $response = $this->client->post("projects/{$this->getResourceId()}/targeting_lists", $attributes);
+        $attributes = array_merge($attributes, compact('name', 'edit_url', 'project_id'));
 
-        return UploadedList::createFromJson($response->getBody()->getContents());
+        $response = $this->client->post("pages", $attributes); 
+
+        return Page::createFromJson($response->getBody()->getContents());   
+    }
+
+
+    /**
+    * @param $projectId
+    * @return mixed
+    */
+    public function events()
+    {
+        $response = $this->client->get("events?project_id={$this->getResourceId()}");
+
+        return EventsCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @param $projectId
-     * @return mixed
+     * @param array $attributes
+     * @return static
      */
-    public function uploadedLists($projectId = null)
+    public function createCustomEvent(array $attributes = [])
     {
-        $this->setResourceId($projectId);
+        $project_id = $this->getResourceId();
 
-        $response = $this->client->get("projects/{$this->getResourceId()}/targeting_lists");
+        $response = $this->client->post("projects/{$project_id}/custom_events", $attributes); 
 
-        return UploadedListCollection::createFromJson($response->getBody()->getContents());
+        return Event::createFromJson($response->getBody()->getContents());   
     }
+
+    /**
+     * @param $audienceId
+     * @return EventsAdapter
+     */
+    public function event($eventId)
+    {
+        return new EventsAdapter($this->client, $eventId, $this->getResourceId(), 'custom');
+    }
+
+    /**
+    * @param $projectId
+    * @return mixed
+    */
+    public function attributes()
+    {
+        $response = $this->client->get("attributes?project_id={$this->getResourceId()}");
+
+        return AttributesCollection::createFromJson($response->getBody()->getContents());
+    }
+
 }

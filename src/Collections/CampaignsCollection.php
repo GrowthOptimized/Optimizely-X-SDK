@@ -2,13 +2,13 @@
 
 namespace GrowthOptimized\Collections;
 
-use GrowthOptimized\Items\UploadedList;
+use GrowthOptimized\Items\Campaign;
 
 /**
- * Class UploadedListCollection
+ * Class ExperimentCollection
  * @package GrowthOptimized\Collections
  */
-class UploadedListCollection extends CollectionAbstract
+class CampaignsCollection extends CollectionAbstract
 {
     /**
      * @param $json
@@ -22,8 +22,8 @@ class UploadedListCollection extends CollectionAbstract
 
         $collection = new static($json);
 
-        return $collection->transform(function ($uploadedList) {
-            return new UploadedList($uploadedList);
+        return $collection->transform(function ($experiment) {
+            return new Campaign($experiment);
         });
     }
 }

@@ -1,12 +1,11 @@
 <?php
-
+	
 namespace GrowthOptimized\Items;
 
 /**
- * Class Experiment
+ * Class Page
  * @package GrowthOptimized\Items;
  */
-class Experiment extends ItemAbstract
+class Message extends ItemAbstract
 {
-
 }
