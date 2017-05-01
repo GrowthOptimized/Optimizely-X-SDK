@@ -2,12 +2,10 @@
 
 namespace GrowthOptimized\Adapters;
 
+use GrowthOptimized\Collections\ExperimentCollection;
 use GrowthOptimized\Collections\ResultCollection;
-use GrowthOptimized\Collections\ScheduleCollection;
-use GrowthOptimized\Collections\VariationCollection;
+
 use GrowthOptimized\Items\Experiment;
-use GrowthOptimized\Items\Schedule;
-use GrowthOptimized\Items\Variation;
 
 /**
  * Class ExperimentsAdapter
@@ -15,27 +13,42 @@ use GrowthOptimized\Items\Variation;
  */
 class ExperimentsAdapter extends AdapterAbstract
 {
-    /**
-     * @param $experimentId
-     * @return static
-     */
-    public function find($experimentId)
-    {
-        $this->setResourceId($experimentId);
 
+    /**
+    * @return mixed
+    */
+    public function all()
+    {   
+        $response = $this->client->get("experiments?project_id={$this->getResourceId()}");
+        return ExperimentCollection::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+    * @return static
+    */
+    public function find()
+    {
         $response = $this->client->get("experiments/{$this->getResourceId()}");
 
         return Experiment::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @return ExperimentsAdapter
+     * @param string $name
+     * @param array $variations
+     * @param array $metrics
+     * @param array $attributes
+     * @return static
      */
-    public function pause()
+    public function create(string $name, array $variations, array $metrics, array $attributes = [])
     {
-        return $this->update([
-            'status' => Experiment::STATUS_PAUSED
-        ]);
+        $project_id = $this->getResourceId();
+
+        $attributes = array_merge($attributes, compact('name', 'variations', 'metrics', 'project_id'));
+
+        $response = $this->client->post("experiments", $attributes);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -44,27 +57,18 @@ class ExperimentsAdapter extends AdapterAbstract
      */
     public function update(array $attributes)
     {
-        $response = $this->client->put("experiments/{$this->getResourceId()}", $attributes);
+        $response = $this->client->patch("experiments/{$this->getResourceId()}", $attributes);
 
         return Experiment::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @return ExperimentsAdapter
+     * 
+     * @return static
      */
-    public function resume()
+    public function delete()
     {
-        return $this->launch();
-    }
-
-    /**
-     * @return ExperimentsAdapter
-     */
-    public function launch()
-    {
-        return $this->update([
-            'status' => Experiment::STATUS_LIVE
-        ]);
+        return $this->client->delete("experiments/{$this->getResourceId()}");
     }
 
     /**
@@ -72,80 +76,18 @@ class ExperimentsAdapter extends AdapterAbstract
      */
     public function archive()
     {
-        return $this->update([
-            'status' => Experiment::STATUS_ARCHIVED
-        ]);
+        return $this->update(['archived' => true]);
     }
 
-    /**
+    /*
      * @return static
      */
-    public function delete()
+    public function results()
     {
-        $response = $this->client->delete("experiments/{$this->getResourceId()}");
+        $response = $this->client->get("experiments/{$this->getResourceId()}/results");
 
-        return $this->booleanResponse($response);
-    }
-
-    /**
-     * @param $start_time
-     * @return ExperimentsAdapter
-     */
-    public function startAt($start_time)
-    {
-        return $this->schedule($start_time);
-    }
-
-    /**
-     * @param null $start_time
-     * @param null $stop_time
-     * @return static
-     */
-    public function schedule($start_time = null, $stop_time = null)
-    {
-        $start_time = $this->normalizeDate($start_time);
-        $stop_time = $this->normalizeDate($stop_time);
-
-        $attributes = array_filter(
-            compact('start_time', 'stop_time')
-        );
-
-        $response = $this->client->post("experiments/{$this->getResourceId()}/schedules", $attributes);
-
-        return Schedule::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $stop_time
-     * @return ExperimentsAdapter
-     */
-    public function stopAt($stop_time)
-    {
-        return $this->schedule(null, $stop_time);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function schedules()
-    {
-        $response = $this->client->get("experiments/{$this->getResourceId()}/schedules");
-
-        return ScheduleCollection::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $description
-     * @param array $attributes
-     * @return static
-     */
-    public function createVariation($description, array $attributes = [])
-    {
-        $attributes = array_merge(compact('description'), $attributes);
-
-        $response = $this->client->post("experiments/{$this->getResourceId()}/variations", $attributes);
-
-        return Variation::createFromJson($response->getBody()->getContents());
+        var_dump('here', $response->getBody());
+        return ResultCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -153,28 +95,9 @@ class ExperimentsAdapter extends AdapterAbstract
      */
     public function variations()
     {
-        $response = $this->client->get("experiments/{$this->getResourceId()}/variations");
+        $project_id = $this->getResourceId();
 
-        return VariationCollection::createFromJson($response->getBody()->getContents());
+        return new VariationsAdapter($this->client, $project_id);
     }
 
-    /**
-     * @return mixed
-     */
-    public function results()
-    {
-        $response = $this->client->get("experiments/{$this->getResourceId()}/stats");
-
-        return ResultCollection::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @return mixed
-     */
-    public function legacyResults()
-    {
-        $response = $this->client->get("experiments/{$this->getResourceId()}/results");
-
-        return ResultCollection::createFromJson($response->getBody()->getContents());
-    }
 }

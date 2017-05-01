@@ -2,18 +2,15 @@
 
 namespace GrowthOptimized\Adapters;
 
-use GrowthOptimized\Collections\AudienceCollection;
-use GrowthOptimized\Collections\DimensionCollection;
-use GrowthOptimized\Collections\ExperimentCollection;
-use GrowthOptimized\Collections\GoalCollection;
+use GrowthOptimized\Adapters\EventsAdapter;
+use GrowthOptimized\Adapters\CampaignsAdapter;
+use GrowthOptimized\Adapters\ExperimentsAdapter;
+use GrowthOptimized\Adapters\AudiencesAdapter;
+use GrowthOptimized\Adapters\AttributesAdapter;
+
 use GrowthOptimized\Collections\ProjectCollection;
-use GrowthOptimized\Collections\UploadedListCollection;
-use GrowthOptimized\Items\Audience;
-use GrowthOptimized\Items\Dimension;
-use GrowthOptimized\Items\Experiment;
-use GrowthOptimized\Items\Goal;
+
 use GrowthOptimized\Items\Project;
-use GrowthOptimized\Items\UploadedList;
 
 /**
  * Class ProjectsAdapter
@@ -21,13 +18,12 @@ use GrowthOptimized\Items\UploadedList;
  */
 class ProjectsAdapter extends AdapterAbstract
 {
-    /**
-     * @return string
-     */
+    // /**
+    //  * @return mixed
+    //  */
     public function all()
     {
         $response = $this->client->get('projects');
-
         return ProjectCollection::createFromJson($response->getBody()->getContents());
     }
 
@@ -45,12 +41,26 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
+     * @param $project_name
+     * @param array $attributes
+     * @return Project
+     */
+    public function create(string $name, array $attributes = [])
+    {
+        $attributes = array_merge($attributes, compact('name'));
+
+        $response = $this->client->post('projects', $attributes);
+
+        return Project::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
      * @return ProjectsAdapter
      */
     public function activate()
     {
         return $this->update([
-            'project_status' => Project::STATUS_ACTIVE
+            'status' => Project::STATUS_ACTIVE
         ]);
     }
 
@@ -60,48 +70,19 @@ class ProjectsAdapter extends AdapterAbstract
      */
     public function update(array $attributes)
     {
-        $response = $this->client->put("projects/{$this->getResourceId()}", $attributes);
+        $response = $this->client->patch("projects/{$this->getResourceId()}", $attributes);
 
         return Project::createFromJson($response->getBody()->getContents());
     }
 
     /**
-     * @return ProjectsAdapter
+     * @return static
      */
     public function archive()
     {
         return $this->update([
-            'project_status' => Project::STATUS_ARCHIVED
+            'status' => Project::STATUS_ARCHIVED
         ]);
-    }
-
-    /**
-     * @param $project_name
-     * @param array $attributes
-     * @return Project
-     */
-    public function create($project_name, array $attributes = [])
-    {
-        $attributes = array_merge($attributes, compact('project_name'));
-
-        $response = $this->client->post('projects', $attributes);
-
-        return Project::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $description
-     * @param $edit_url
-     * @param array $attributes
-     * @return static
-     */
-    public function createExperiment($description, $edit_url, array $attributes = [])
-    {
-        $attributes = array_merge($attributes, compact('description', 'edit_url'));
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/experiments", $attributes);
-
-        return Experiment::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -109,123 +90,57 @@ class ProjectsAdapter extends AdapterAbstract
      */
     public function experiments()
     {
-        $response = $this->client->get("projects/{$this->getResourceId()}/experiments");
-
-        return ExperimentCollection::createFromJson($response->getBody()->getContents());
+        return new ExperimentsAdapter($this->client, $this->getResourceId());
     }
 
     /**
-     * @param $name
-     * @param string $description
-     * @param array $attributes
-     * @return static
+     * @return CampaignsAdapter
      */
-    public function createAudience($name, $description = '', array $attributes = [])
+    public function campaigns()
     {
-        $attributes = array_merge($attributes, compact('name', 'description'));
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/audiences", $attributes);
-
-        return Audience::createFromJson($response->getBody()->getContents());
+        return new CampaignsAdapter($this->client, $this->getResourceId());
     }
 
     /**
-     * @param $projectId
-     * @return mixed
+     * @return AudienceAdapter
      */
-    public function audiences($projectId = null)
+    public function audiences()
     {
-        $this->setResourceId($projectId);
-
-        $response = $this->client->get("projects/{$this->getResourceId()}/audiences");
-
-        return AudienceCollection::createFromJson($response->getBody()->getContents());
+        return new AudiencesAdapter($this->client, $this->getResourceId());
     }
 
     /**
-     * @param $title
-     * @param $goal_type
-     * @param array $attributes
-     * @return static
+     * @return PagesAdapter
      */
-    public function createGoal($title, $goal_type, array $attributes = [])
+    public function pages()
     {
-        $attributes = array_merge($attributes, compact('title', 'goal_type'));
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/goals", $attributes);
-
-        return Goal::createFromJson($response->getBody()->getContents());
+        return new PagesAdapter($this->client, $this->getResourceId());
     }
 
     /**
-     * @param $projectId
-     * @return mixed
-     */
-    public function goals($projectId = null)
+    * @return EventsAdapter
+    */
+    public function events()
     {
-        $this->setResourceId($projectId);
-
-        $response = $this->client->get("projects/{$this->getResourceId()}/goals");
-
-        return GoalCollection::createFromJson($response->getBody()->getContents());
+        return new EventsAdapter($this->client, $this->getResourceId());
     }
 
     /**
-     * @param $name
-     * @param string $description
-     * @param string $client_api_name
-     * @return static
+     * @param $audienceId
+     * @return EventsAdapter
      */
-    public function createDimension($name, $description = '', $client_api_name = '')
+    public function event($eventId)
     {
-        $attributes = compact('name', 'description', 'client_api_name');
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/dimensions", $attributes);
-
-        return Dimension::createFromJson($response->getBody()->getContents());
+        return new EventsAdapter($this->client, $this->getResourceId(), $eventId, 'custom');
     }
 
     /**
-     * @param $projectId
-     * @return mixed
-     */
-    public function dimensions($projectId = null)
+    * @param $projectId
+    * @return mixed
+    */
+    public function attributes()
     {
-        $this->setResourceId($projectId);
-
-        $response = $this->client->get("projects/{$this->getResourceId()}/dimensions");
-
-        return DimensionCollection::createFromJson($response->getBody()->getContents());
+        return new AttributesAdapter($this->client, $this->getResourceId());
     }
 
-    /**
-     * @param $name
-     * @param $type
-     * @param $format
-     * @param $key_fields
-     * @param $list_content
-     * @param array $attributes
-     * @return static
-     */
-    public function createUploadedList($name, $type, $format, $key_fields, $list_content, array $attributes = [])
-    {
-        $attributes = array_merge($attributes, compact('name', 'type', 'format', 'key_fields', 'list_content'));
-
-        $response = $this->client->post("projects/{$this->getResourceId()}/targeting_lists", $attributes);
-
-        return UploadedList::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $projectId
-     * @return mixed
-     */
-    public function uploadedLists($projectId = null)
-    {
-        $this->setResourceId($projectId);
-
-        $response = $this->client->get("projects/{$this->getResourceId()}/targeting_lists");
-
-        return UploadedListCollection::createFromJson($response->getBody()->getContents());
-    }
 }

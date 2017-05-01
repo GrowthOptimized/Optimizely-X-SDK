@@ -3,10 +3,10 @@
 namespace GrowthOptimized\Items;
 
 /**
- * Class Variation
+ * Class Campaign
  * @package GrowthOptimized\Items;
  */
-class Variation extends ItemAbstract
+class Campaign extends ItemAbstract
 {
     //
 }

@@ -3,10 +3,10 @@
 namespace GrowthOptimized\Items;
 
 /**
- * Class Experiment
+ * Class Event
  * @package GrowthOptimized\Items;
  */
-class Experiment extends ItemAbstract
+class Event extends ItemAbstract
 {
 
 }

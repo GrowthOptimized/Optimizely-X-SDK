@@ -2,7 +2,7 @@
 
 namespace GrowthOptimized\Adapters;
 
-use GrowthOptimized\Items\Variation;
+use GrowthOptimized\Items\Experiment;
 
 /**
  * Class VariationsAdapter
@@ -10,80 +10,19 @@ use GrowthOptimized\Items\Variation;
  */
 class VariationsAdapter extends AdapterAbstract
 {
-    /**
-     * @param $variationId
-     * @return Variation
+
+	/**
+     * @param array $variations
+     * @return static
      */
-    public function find($variationId)
+    public function update(array $variations)
     {
-        $this->setResourceId($variationId);
+        $response = $this->client->patch(
+        	"experiments/{$this->getResourceId()}", 
+        	["variations" => $variations]
+        );
 
-        $response = $this->client->get("variations/{$this->getResourceId()}");
-
-        return Variation::createFromJson($response->getBody()->getContents());
+        return Experiment::createFromJson($response->getBody()->getContents());
     }
 
-    /**
-     * @param $description
-     * @return Variation
-     */
-    public function description($description)
-    {
-        return $this->update(compact('description'));
-    }
-
-    /**
-     * @param array $attributes
-     * @return Variation
-     */
-    public function update(array $attributes = [])
-    {
-        $response = $this->client->put("variations/{$this->getResourceId()}", $attributes);
-
-        return Variation::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * @param $weight
-     * @return Variation
-     */
-    public function weight($weight)
-    {
-        return $this->update(compact('weight'));
-    }
-
-    /**
-     * @param $js_component
-     * @return Variation
-     */
-    public function js_component($js_component)
-    {
-        return $this->update(compact('js_component'));
-    }
-
-    /**
-     * @return Variation
-     */
-    public function pause()
-    {
-        return $this->update(['is_paused' => true]);
-    }
-
-    /**
-     * @return Variation
-     */
-    public function resume()
-    {
-        return $this->update(['is_paused' => false]);
-    }
-
-    /**
-     * @return bool
-     */
-    public function delete()
-    {
-        $response = $this->client->delete("variations/{$this->getResourceId()}");
-
-        return $this->booleanResponse($response);
-    }
 }

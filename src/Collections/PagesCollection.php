@@ -2,13 +2,13 @@
 
 namespace GrowthOptimized\Collections;
 
-use GrowthOptimized\Items\UploadedList;
+use GrowthOptimized\Items\Page;
 
 /**
- * Class UploadedListCollection
+ * Class ResultCollection
  * @package GrowthOptimized\Collections
  */
-class UploadedListCollection extends CollectionAbstract
+class PagesCollection extends CollectionAbstract
 {
     /**
      * @param $json
@@ -22,8 +22,8 @@ class UploadedListCollection extends CollectionAbstract
 
         $collection = new static($json);
 
-        return $collection->transform(function ($uploadedList) {
-            return new UploadedList($uploadedList);
+        return $collection->transform(function ($result) {
+            return new Page($result);
         });
     }
 }

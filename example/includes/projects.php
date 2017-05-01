@@ -4,27 +4,23 @@
  * PROJECTS:
  */
 
+// // List projects in account
+// var_dump($optimizely->projects()->all());
+
 // Read a project
-$optimizely->projects()->find($projectId);
+// $optimizely->project($projectId)->find();
 
-// Create a project
-$optimizely->projects()->create([
-    'project_name' => 'My new project'
-]);
+// // Create a project
+// $optimizely->projects()->create('My new project', []);
 
-// Update a project
-$optimizely->projects()->update($projectId, [
-    'project_name' => 'My new name'
-]);
+// // Update a project
+// $optimizely->project($projectId)->update(['name' => 'My new name']);
 
-// Delete a project
-// Not supported by Optimizely Rest API
+// // Delete a project
+// // Not supported by Optimizely Rest API
 
-// List projects in account
-$optimizely->projects()->all();
+// // Activate a project
+// $optimizely->project($projectId)->activate();
 
-// Activate a project
-$optimizely->projects()->activate($projectId);
-
-// Archive a project
-$optimizely->projects()->archive($projectId);
+// // Archive a project
+// $optimizely->project($projectId)->archive();

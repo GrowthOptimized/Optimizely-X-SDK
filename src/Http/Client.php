@@ -34,9 +34,9 @@ class Client extends BaseClient
      * @param $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function put($endpoint, $options)
+    public function patch($endpoint, $options)
     {
-        return $this->request('PUT', $endpoint, ['body' => json_encode($options)]);
+        return $this->request('PATCH', $endpoint, ['body' => json_encode($options)]);
     }
 
     /**

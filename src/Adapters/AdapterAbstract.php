@@ -21,6 +21,7 @@ class AdapterAbstract
      */
     protected $id;
 
+
     /**
      * Optimizely constructor.
      * @param ClientInterface $client

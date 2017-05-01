@@ -1,12 +1,11 @@
 <?php
-
+	
 namespace GrowthOptimized\Items;
 
 /**
- * Class Dimension
+ * Class Page
  * @package GrowthOptimized\Items;
  */
-class Dimension extends ItemAbstract
+class Page extends ItemAbstract
 {
-    //
 }

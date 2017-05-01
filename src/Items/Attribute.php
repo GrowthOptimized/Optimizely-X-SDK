@@ -3,10 +3,10 @@
 namespace GrowthOptimized\Items;
 
 /**
- * Class Experiment
+ * Class Attribute
  * @package GrowthOptimized\Items;
  */
-class Experiment extends ItemAbstract
+class Attribute extends ItemAbstract
 {
-
+    //
 }
