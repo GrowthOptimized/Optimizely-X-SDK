@@ -20,8 +20,6 @@ If you wish to use the token based authentication, simply pass `true` as a secon
 $optimizely = Optimizely::create($token, true);
 ```
 
-### Projects
-
 List projects
 
 ```php
@@ -71,7 +69,7 @@ $optimizely->project($projectId)->archive();
 List Campaigns
 
 ```php
-$optimizely->project($projectId)->campaigns();
+$optimizely->project($projectId)->campaigns()->all();
 ```
 
 Find Campaign
@@ -83,13 +81,13 @@ $optimizely->campaign($campaignId)->find();
 Create Campaign
 
 ```php
-$optimizely->project($projectId)->createCampaign(
+$optimizely->project($projectId)->campaigns()->create(
     'Landing Page Optimization', 
-    ["status": "not_started"]
+    ["status" => "not_started"]
 );
 ```
 
-Update a campaign 
+Update a Campaign 
 
 ```php
 $optimizely->campaign($campaignId)->update([
@@ -102,7 +100,7 @@ $optimizely->campaign($campaignId)->update([
 List experiments in project
 
 ```php
-$optimizely->project($projectId)->experiments();
+$optimizely->project($projectId)->experiments()->all();
 ```
 
 Find experiment 
@@ -114,8 +112,9 @@ $optimizely->experiment($experimentId)->find();
 Create an experiment
 
 ```php
-$optimizely->project($projectId)->createExperiment('my test', [
-    "variations" => [
+$optimizely->project($projectId)->experiments()->create(
+    'my test', 
+    [
         [
             "name" => "control",
             "weight" => 5000
@@ -125,17 +124,16 @@ $optimizely->project($projectId)->createExperiment('my test', [
             "weight" => 5000
         ]
     ],
-    "metrics" => [
+    [
         [
             "aggregator" => "unique",
             "event_id" => 0,
             "field" => "revenue"
         ]
-    ]
+    ],
+    [status => 'not started']
 ]);
 ```
-
-
 Update an experiment
 
 ```php
@@ -160,14 +158,22 @@ $optimizely->experiment($experimentId)->archive();
 Change Variations
 
 ```php
-$optimizely->experiment($experimentId)->changeVariations([
+$optimizely->experiment($experimentId)->variations()->update([
     [
         "name" => "control",
-        "weight" => 5000
+        "weight" => 2500
     ],
     [
         "name" => "varA",
-        "weight" => 5000
+        "weight" => 2500
+    ],
+    [
+        "name" => "varB",
+        "weight" => 2500
+    ],
+    [
+        "name" => "varF",
+        "weight" => 2500
     ]
 ]);
 ```
@@ -177,7 +183,7 @@ $optimizely->experiment($experimentId)->changeVariations([
 List audiences
 
 ```php
-$optimizely->project($projectId)->audiences();
+$optimizely->project($projectId)->audiences()->all();
 ```
 
 Find an audience
@@ -186,10 +192,10 @@ Find an audience
 $optimizely->audience($audienceId)->find();
 ```
 
-Create an audience / NOT WORKING
+Create an audience
 
 ```php 
-$optimizely->project($projectId)->createAudience(
+$optimizely->project($projectId)->audiences()->create(
     'My second audience', 
     '[\"and\", {\"type\": \"language\", \"value\": \"es\"}, {\"type\": \"location\", \"value\": \"US-CA-SANFRANCISCO\"}]',
     ["description" => 'People that speak spanish in San Fran']
@@ -213,7 +219,7 @@ Delete an audience
 List Pages
 
 ```php
-$optimizely->project($projectId)->pages();
+$optimizely->project($projectId)->pages()->all();
 ```
 
 Find a Page
@@ -225,7 +231,7 @@ $optimizely->page($pageId)->find();
 Create a page
 
 ```php
-$optimizely->project($projectId)->createPage($name, $edit_url, [
+$optimizely->project($projectId)->pages()->create($name, $edit_url, [
     'category' => 'article'
 ]);
 ```
@@ -247,7 +253,7 @@ $optimizely->page($pageId)->delete();
 List Events
 
 ```php
-$optimizely->project($projectId)->events();
+$optimizely->project($projectId)->events()->all();
 ```
 
 Find Event
@@ -261,7 +267,7 @@ $optimizely->event($eventId)->find();
 Create In-page Event
 
 ```php
-$optimizely->page($pageId)->createEvent(
+$optimizely->page($pageId)->events()->create(
     'my sign up goal', 
     'click', 
     ['selector' => '.sign-up-btn'],
@@ -288,7 +294,7 @@ $optimizely->page($pageId)->event($inPageEventId)->delete();
 Create Custom Event
 
 ```php
-$optimizely->project($projectId)->createCustomEvent([
+$optimizely->project($projectId)->events()->create([
     'event_type' => 'custom',
     'name' => 'my custom event',
     'key' => 'my_event_key'

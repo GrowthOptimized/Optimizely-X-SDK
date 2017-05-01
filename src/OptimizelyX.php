@@ -84,7 +84,7 @@ class OptimizelyX
      * @param $experimentId
      * @return ExperimentsAdapter
      */
-    public function experiment($experimentId)
+    public function experiment($experimentId = null)
     {
         return new ExperimentsAdapter($this->client, $experimentId);
     }

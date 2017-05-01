@@ -2,6 +2,8 @@
 
 namespace GrowthOptimized\Adapters;
 
+use GrowthOptimized\Collections\EventsCollection;
+
 use GrowthOptimized\Items\Event;
 use GrowthOptimized\Items\Message;
 
@@ -17,7 +19,7 @@ class EventsAdapter extends AdapterAbstract
     /**
      * @var
      */
-    protected $pageId;
+    protected $eventId;
 
         /**
      * @var
@@ -29,11 +31,21 @@ class EventsAdapter extends AdapterAbstract
      * @param ClientInterface $client, $id, $parentId, $eventId
      * @param null $id
      */
-    public function __construct(ClientInterface $client, $id = null, $parentId = null, $eventType = null)
+    public function __construct(ClientInterface $client, $id = null, $eventId = null, $eventType = null)
     {
-        $this->parentId = $parentId;
+        $this->eventId = $eventId;
         $this->eventType = $eventType;
         parent::__construct($client, $id);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function all()
+    {
+        $response = $this->client->get("events?project_id={$this->getResourceId()}");
+
+        return EventsCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -47,6 +59,32 @@ class EventsAdapter extends AdapterAbstract
     }
 
     /**
+     * @param string $name
+     * @param string $edit_url
+     * @param array $attributes
+     * @return static
+     */
+    public function create($name, string $event_type = null, array $config = null, $attributes = [])
+    {
+
+        if ($this->eventType == 'in-page') {
+            
+            $attributes = array_merge($attributes, compact('name', 'event_type', 'config'));
+
+            $response = $this->client->post("pages/{$this->getResourceId()}/events", $attributes);   
+
+        } else {
+
+            $attributes= $name;
+
+            $response = $this->client->post("projects/{$this->getResourceId()}/custom_events", $attributes); 
+
+        }
+
+        return Event::createFromJson($response->getBody()->getContents());   
+    }
+
+    /**
      * @param array $attributes
      * @return static
      */
@@ -54,11 +92,11 @@ class EventsAdapter extends AdapterAbstract
     {
         if ($this->eventType == 'in-page') {
 
-            $response = $this->client->patch("pages/{$this->parentId}/events/{$this->getResourceId()}", $attributes);
+            $response = $this->client->patch("pages/{$this->getResourceId()}/events/{$this->eventId}", $attributes);
 
         } else {
 
-            $response = $this->client->patch("projects/{$this->parentId}/custom_events/{$this->getResourceId()}", $attributes);
+            $response = $this->client->patch("projects/{$this->getResourceId()}/custom_events/{$this->eventId}", $attributes);
             
         }
         
@@ -74,15 +112,13 @@ class EventsAdapter extends AdapterAbstract
 
         if ($this->eventType == 'in-page') {
 
-            $response = $this->client->delete("pages/{$this->parentId}/events/{$this->getResourceId()}");
+            return $this->client->delete("pages/{$this->getResourceId()}/events/{$this->eventId}");
 
         } else {
 
-            $response = $this->client->delete("projects/{$this->parentId}/custom_events/{$this->getResourceId()}");
+            return $this->client->delete("projects/{$this->getResourceId()}/custom_events/{$this->eventId}");
             
         }
-
-    	return Message::createFromJson(['status' => $response->getStatusCode()]);
 
     }
 

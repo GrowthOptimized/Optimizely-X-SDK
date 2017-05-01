@@ -4,6 +4,8 @@ namespace GrowthOptimized\Adapters;
 
 use GrowthOptimized\Adapters\EventsAdapter;
 
+use GrowthOptimized\Collections\PagesCollection;
+
 use GrowthOptimized\Items\Page;
 use GrowthOptimized\Items\Message;
 use GrowthOptimized\Items\Event;
@@ -14,6 +16,34 @@ use GrowthOptimized\Items\Event;
  */
 class PagesAdapter extends AdapterAbstract
 {
+
+    /**
+    * @return mixed
+    */
+    public function all()
+    {   
+        $response = $this->client->get("pages?project_id={$this->getResourceId()}");
+
+        return PagesCollection::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @param string $name
+     * @param string $edit_url
+     * @param array $attributes
+     * @return static
+     */
+    public function create(string $name, string $edit_url, array $attributes = [])
+    {
+        $project_id = $this->getResourceId();
+
+        $attributes = array_merge($attributes, compact('name', 'edit_url', 'project_id'));
+
+        $response = $this->client->post("pages", $attributes); 
+
+        return Page::createFromJson($response->getBody()->getContents());   
+    }
+
     /**
      * @return static
      */
@@ -41,36 +71,24 @@ class PagesAdapter extends AdapterAbstract
     */
     public function delete()
     {
-    	$response = $this->client->delete("pages/{$this->getResourceId()}");
-
-    	return Message::createFromJson(['status' => $response->getStatusCode()]);
-
+    	return $this->client->delete("pages/{$this->getResourceId()}");
     }
-
-    /**
-    * @param string $name
-    * @param string $event_type
-    * @param array $attributes
-    * @return static
-    */
-    public function createEvent(string $name, string $event_type, array $config, $attributes = [])
-    {
-    	$attributes = array_merge($attributes, ['config' => $config], compact('name', 'event_type'));
-
-    	$response = $this->client->post("pages/{$this->getResourceId()}/events", $attributes);
-
-    	return Event::createFromJson($response->getBody()->getContents());
-    }
-
 
     /**
      * @param $audienceId
      * @return AudiencesAdapter
      */
-    public function event($eventId)
+    public function event($eventId = null)
     {
-        return new EventsAdapter($this->client, $eventId, $this->getResourceId(), 'in-page');
+        return new EventsAdapter($this->client, $this->getResourceId(), $eventId, 'in-page');
     }
 
+    /**
+     * @return EventsAdapter
+     */
+    public function events($eventId = null)
+    {
+        return new EventsAdapter($this->client, $this->getResourceId(), $eventId, 'in-page');
+    }
 
 }

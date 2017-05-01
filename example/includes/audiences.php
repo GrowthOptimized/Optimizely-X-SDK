@@ -5,16 +5,16 @@
  */
 
 // List audiences
-// var_dump($optimizely->project($projectId)->audiences());
+// var_dump($optimizely->project($projectId)->audiences()->all());
 
-// Find an audience / NOT WORKING
+// Find an audience
 // var_dump($optimizely->audience($audienceId)->find());
 
-// Create an audience / NOT WORKING
-// $optimizely->project($projectId)->createAudience(
-// 	'My second audience', 
-//     '[\"and\", {\"type\": \"language\", \"value\": \"es\"}, {\"type\": \"location\", \"value\": \"US-CA-SANFRANCISCO\"}]',
-//     ["description" => 'People that speak spanish in San Fran']);
+// Create an audience
+// $optimizely->project($projectId)->audiences()->create(
+// 	'My french audience', 
+//     "[\"and\", {\"type\": \"language\", \"value\": \"fa\"}]",
+//     ["description" => 'People that speak speak french']);
 
 //Update an audience
 // $optimizely->audience($audienceId)->update([

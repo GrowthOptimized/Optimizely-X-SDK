@@ -13,12 +13,40 @@ use GrowthOptimized\Items\Campaign;
 class CampaignsAdapter extends AdapterAbstract
 {
 
+    /**
+    * @return mixed
+    */
+    public function all()
+    { 
+
+        $response = $this->client->get("campaigns?project_id={$this->getResourceId()}");
+
+        return CampaignsCollection::createFromJson($response->getBody()->getContents());
+    }
+
+
 	/**
     * @return static
     */
     public function find()
     {
         $response = $this->client->get("campaigns/{$this->getResourceId()}");
+
+        return Campaign::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @param $name
+     * @param array $attributes
+     * @return static
+     */
+    public function create(string $name, array $attributes = [])
+    {
+        $project_id = $this->getResourceId();
+
+        $attributes = array_merge($attributes, compact('name', 'project_id'));
+
+        $response = $this->client->post("campaigns", $attributes);
 
         return Campaign::createFromJson($response->getBody()->getContents());
     }

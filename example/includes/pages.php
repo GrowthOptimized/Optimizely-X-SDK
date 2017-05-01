@@ -1,20 +1,20 @@
 <?php
 
 // List Pages
-// $optimizely->project($projectId)->pages();
+// var_dump($optimizely->project($projectId)->pages()->all());
 
 // Find a page 
-// $optimizely->page($pageId)->find();
+// var_dump($optimizely->page($pageId)->find());
 
 // Create a page
-// $page = $optimizely->project($projectId)->createPage(
+// var_dump($optimizely->project($projectId)->pages()->create(
 // 	'new category page', 
 // 	'http://www.widerfunnel.com/categories/11', 
 // 	['category' => 'article']
-// );
+// ));
 
 // Update a page
-// var_dump($optimizely->page($pageId)->update(['name' => 'my updated name']));
+// var_dump($optimizely->page($pageId)->update(['name' => 'my updated page name']));
 
 // Delete a page 
 // var_dump($optimizely->page($pageId)->delete());

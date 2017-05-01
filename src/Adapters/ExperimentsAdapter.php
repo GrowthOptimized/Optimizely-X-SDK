@@ -2,7 +2,9 @@
 
 namespace GrowthOptimized\Adapters;
 
+use GrowthOptimized\Collections\ExperimentCollection;
 use GrowthOptimized\Collections\ResultCollection;
+
 use GrowthOptimized\Items\Experiment;
 use GrowthOptimized\Items\Schedule;
 use GrowthOptimized\Items\Result;
@@ -20,7 +22,7 @@ class ExperimentsAdapter extends AdapterAbstract
     */
     public function all()
     {   
-        $response = $this->client->get("experiments");
+        $response = $this->client->get("experiments?project_id={$this->getResourceId()}");
         return ExperimentCollection::createFromJson($response->getBody()->getContents());
     }
 
@@ -30,6 +32,24 @@ class ExperimentsAdapter extends AdapterAbstract
     public function find()
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}");
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @param string $name
+     * @param array $variations
+     * @param array $metrics
+     * @param array $attributes
+     * @return static
+     */
+    public function create(string $name, array $variations, array $metrics, array $attributes = [])
+    {
+        $project_id = $this->getResourceId();
+
+        $attributes = array_merge($attributes, compact('name', 'variations', 'metrics', 'project_id'));
+
+        $response = $this->client->post("experiments", $attributes);
 
         return Experiment::createFromJson($response->getBody()->getContents());
     }
@@ -51,9 +71,7 @@ class ExperimentsAdapter extends AdapterAbstract
      */
     public function delete()
     {
-        $response = $this->client->delete("experiments/{$this->getResourceId()}");
-
-        return Message::createFromJson(['status' => $response->getStatusCode()]);
+        return $this->client->delete("experiments/{$this->getResourceId()}");
     }
 
     /**
@@ -80,6 +98,16 @@ class ExperimentsAdapter extends AdapterAbstract
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}/results");
         return ResultCollection::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function variations()
+    {
+        $project_id = $this->getResourceId();
+
+        return new VariationsAdapter($this->client, $project_id);
     }
 
 }

@@ -5,10 +5,10 @@
  */
 
 // // List projects in account
-var_dump($optimizely->projects()->all());
+// var_dump($optimizely->projects()->all());
 
 // Read a project
-// $optimizely->projects()->find($projectId);
+// $optimizely->project($projectId)->find();
 
 // // Create a project
 // $optimizely->projects()->create('My new project', []);
