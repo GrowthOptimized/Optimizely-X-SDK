@@ -9,6 +9,7 @@ use GrowthOptimized\Adapters\ProjectsAdapter;
 use GrowthOptimized\Adapters\CampaignsAdapter;
 use GrowthOptimized\Adapters\PagesAdapter;
 use GrowthOptimized\Adapters\EventsAdapter;
+use GrowthOptimized\Adapters\AttributesAdapter;
 use GrowthOptimized\Http\Client;
 
 /**
@@ -90,28 +91,12 @@ class OptimizelyX
     }
 
     /**
-     * @return ExperimentsAdapter
-     */
-    public function experiments()
-    {
-        return new ExperimentsAdapter($this->client);
-    }
-
-    /**
      * @param $audienceId
      * @return AudiencesAdapter
      */
     public function audience($audienceId)
     {
         return new AudiencesAdapter($this->client, $audienceId);
-    }
-
-    /**
-     * @return string
-     */
-    public function audiences()
-    {
-        return new AudiencesAdapter($this->client);
     }
 
     /**
@@ -130,6 +115,15 @@ class OptimizelyX
     public function event($eventId)
     {
         return new EventsAdapter($this->client, $eventId);
+    }
+
+            /**
+     * @param $attributeId
+     * @return AttributeAdapter
+     */
+    public function attribute($attributeId)
+    {
+        return new AttributesAdapter($this->client, $attributeId);
     }
 
 }

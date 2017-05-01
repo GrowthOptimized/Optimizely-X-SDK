@@ -19,15 +19,16 @@ $pageId = 8359424378;
 $eventId = 8359424378;
 $inPageEventId = 8350928181;
 $customEventId = 8360592757;
+$attributeId = 8357910112;
 
 $optimizely = OptimizelyX::create($token);
 
-// include __DIR__ . '/includes/projects.php';
-// include __DIR__ . '/includes/campaigns.php';
-// include __DIR__ . '/includes/experiments.php';
-// include __DIR__ . '/includes/variations.php';
-// include __DIR__ . '/includes/audiences.php';
-// include __DIR__ . '/includes/pages.php';
+include __DIR__ . '/includes/projects.php';
+include __DIR__ . '/includes/campaigns.php';
+include __DIR__ . '/includes/experiments.php';
+include __DIR__ . '/includes/variations.php';
+include __DIR__ . '/includes/audiences.php';
+include __DIR__ . '/includes/pages.php';
 include __DIR__ . '/includes/events.php';
-// include __DIR__ . '/includes/attributes.php';
-// include __DIR__ . '/includes/results.php';
+include __DIR__ . '/includes/attributes.php';
+include __DIR__ . '/includes/results.php';

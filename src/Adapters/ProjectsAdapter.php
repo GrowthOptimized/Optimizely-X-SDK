@@ -6,20 +6,11 @@ use GrowthOptimized\Adapters\EventsAdapter;
 use GrowthOptimized\Adapters\CampaignsAdapter;
 use GrowthOptimized\Adapters\ExperimentsAdapter;
 use GrowthOptimized\Adapters\AudiencesAdapter;
+use GrowthOptimized\Adapters\AttributesAdapter;
 
-use GrowthOptimized\Collections\AudienceCollection;
-use GrowthOptimized\Collections\ExperimentCollection;
 use GrowthOptimized\Collections\ProjectCollection;
-use GrowthOptimized\Collections\CampaignsCollection;
-use GrowthOptimized\Collections\PagesCollection;
-use GrowthOptimized\Collections\EventsCollection;
-use GrowthOptimized\Collections\AttributesCollection;
-use GrowthOptimized\Items\Audience;
-use GrowthOptimized\Items\Experiment;
+
 use GrowthOptimized\Items\Project;
-use GrowthOptimized\Items\Campaign;
-use GrowthOptimized\Items\Page;
-use GrowthOptimized\Items\Event;
 
 /**
  * Class ProjectsAdapter
@@ -149,9 +140,7 @@ class ProjectsAdapter extends AdapterAbstract
     */
     public function attributes()
     {
-        $response = $this->client->get("attributes?project_id={$this->getResourceId()}");
-
-        return AttributesCollection::createFromJson($response->getBody()->getContents());
+        return new AttributesAdapter($this->client, $this->getResourceId());
     }
 
 }

@@ -5,7 +5,6 @@ namespace GrowthOptimized\Adapters;
 use GrowthOptimized\Collections\EventsCollection;
 
 use GrowthOptimized\Items\Event;
-use GrowthOptimized\Items\Message;
 
 use GuzzleHttp\ClientInterface;
 

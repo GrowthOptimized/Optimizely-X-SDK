@@ -6,9 +6,6 @@ use GrowthOptimized\Collections\ExperimentCollection;
 use GrowthOptimized\Collections\ResultCollection;
 
 use GrowthOptimized\Items\Experiment;
-use GrowthOptimized\Items\Schedule;
-use GrowthOptimized\Items\Result;
-use GrowthOptimized\Items\Message;
 
 /**
  * Class ExperimentsAdapter
@@ -82,21 +79,14 @@ class ExperimentsAdapter extends AdapterAbstract
         return $this->update(['archived' => true]);
     }
 
-    /**
-    * @param $attributes
-    * @return Experiment
-    */
-    public function changeVariations($attributes = [])
-    {   
-        return $this->update(['variations' => $attributes]);
-    }
-
     /*
      * @return static
      */
     public function results()
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}/results");
+
+        var_dump('here', $response->getBody());
         return ResultCollection::createFromJson($response->getBody()->getContents());
     }
 

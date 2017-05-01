@@ -144,7 +144,7 @@ Delete an experiment
 
 ```php
 $optimizely->experiment($experimentId)->delete();
-```php
+```
 
 Archive an experiment
 

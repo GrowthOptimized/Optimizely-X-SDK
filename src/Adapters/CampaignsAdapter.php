@@ -72,7 +72,7 @@ class CampaignsAdapter extends AdapterAbstract
     }
 
     /**
-    * @return null
+    * @return request
     */
     public function delete()
     {
