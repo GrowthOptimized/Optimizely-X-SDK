@@ -66,7 +66,9 @@ class AttributesAdapter extends AdapterAbstract
     */
     public function delete()
     {
-        return $this->client->delete("attributes/{$this->getResourceId()}");
+        $response = $this->client->delete("attributes/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
 }

@@ -76,7 +76,9 @@ class CampaignsAdapter extends AdapterAbstract
     */
     public function delete()
     {
-    	return $this->client->delete("campaigns/{$this->getResourceId()}");
+    	$response = $this->client->delete("campaigns/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
 }

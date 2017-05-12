@@ -71,7 +71,9 @@ class PagesAdapter extends AdapterAbstract
     */
     public function delete()
     {
-    	return $this->client->delete("pages/{$this->getResourceId()}");
+    	$response = $this->client->delete("pages/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
     /**
