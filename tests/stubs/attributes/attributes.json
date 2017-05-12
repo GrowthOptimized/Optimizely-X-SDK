@@ -1,0 +1,22 @@
+[ 
+  {
+    "id": 86281890,
+    "project_id": 45173685,
+    "condition_type": "custom_attribute",
+    "key": "my_newer_attribute",
+    "archived": false,
+    "name": "my newer attribute",
+    "last_modified": "2017-05-12T05:43:24.170120",
+    "description": "this is an attribute" 
+  },
+  {
+    "id": 8376722788,
+    "project_id": 8345173685,
+    "condition_type": "custom_attribute",
+    "key": "my_new_attribute",
+    "archived": false,
+    "name": "my new attribute", 
+    "last_modified": "2017-05-12T03:25:21.082100", 
+    "description": "this is an attribute" 
+  }
+]

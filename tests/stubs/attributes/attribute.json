@@ -1,0 +1,10 @@
+{
+    "id": 8376722788,
+    "project_id": 8345173685,
+    "condition_type": "custom_attribute",
+    "key": "my_new_attribute",
+    "archived": false,
+    "name": "my new attribute", 
+    "last_modified": "2017-05-12T03:25:21.082100", 
+    "description": "this is an attribute" 
+}

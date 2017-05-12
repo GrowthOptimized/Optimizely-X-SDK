@@ -68,7 +68,9 @@ class ExperimentsAdapter extends AdapterAbstract
      */
     public function delete()
     {
-        return $this->client->delete("experiments/{$this->getResourceId()}");
+        $response = $this->client->delete("experiments/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
     /**
@@ -86,7 +88,6 @@ class ExperimentsAdapter extends AdapterAbstract
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}/results");
 
-        var_dump('here', $response->getBody());
         return ResultCollection::createFromJson($response->getBody()->getContents());
     }
 

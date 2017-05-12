@@ -111,14 +111,15 @@ class EventsAdapter extends AdapterAbstract
 
         if ($this->eventType == 'in-page') {
 
-            return $this->client->delete("pages/{$this->getResourceId()}/events/{$this->eventId}");
+            $response = $this->client->delete("pages/{$this->getResourceId()}/events/{$this->eventId}");
 
         } else {
 
-            return $this->client->delete("projects/{$this->getResourceId()}/custom_events/{$this->eventId}");
+            $response = $this->client->delete("projects/{$this->getResourceId()}/custom_events/{$this->eventId}");
             
         }
 
+        return $this->booleanResponse($response);
     }
 
 }
