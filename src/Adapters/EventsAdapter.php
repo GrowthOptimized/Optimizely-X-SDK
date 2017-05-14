@@ -3,9 +3,7 @@
 namespace GrowthOptimized\Adapters;
 
 use GrowthOptimized\Collections\EventsCollection;
-
 use GrowthOptimized\Items\Event;
-
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -20,14 +18,14 @@ class EventsAdapter extends AdapterAbstract
      */
     protected $eventId;
 
-        /**
+    /**
      * @var
      */
     protected $eventType;
 
     /**
      * Optimizely constructor.
-     * @param ClientInterface $client, $id, $parentId, $eventId
+     * @param ClientInterface $client , $id, $parentId, $eventId
      * @param null $id
      */
     public function __construct(ClientInterface $client, $id = null, $eventId = null, $eventType = null)
@@ -67,20 +65,20 @@ class EventsAdapter extends AdapterAbstract
     {
 
         if ($this->eventType == 'in-page') {
-            
+
             $attributes = array_merge($attributes, compact('name', 'event_type', 'config'));
 
-            $response = $this->client->post("pages/{$this->getResourceId()}/events", $attributes);   
+            $response = $this->client->post("pages/{$this->getResourceId()}/events", $attributes);
 
         } else {
 
-            $attributes= $name;
+            $attributes = $name;
 
-            $response = $this->client->post("projects/{$this->getResourceId()}/custom_events", $attributes); 
+            $response = $this->client->post("projects/{$this->getResourceId()}/custom_events", $attributes);
 
         }
 
-        return Event::createFromJson($response->getBody()->getContents());   
+        return Event::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -95,10 +93,11 @@ class EventsAdapter extends AdapterAbstract
 
         } else {
 
-            $response = $this->client->patch("projects/{$this->getResourceId()}/custom_events/{$this->eventId}", $attributes);
-            
+            $response = $this->client->patch("projects/{$this->getResourceId()}/custom_events/{$this->eventId}",
+                $attributes);
+
         }
-        
+
         return Event::createFromJson($response->getBody()->getContents());
 
     }
@@ -116,7 +115,7 @@ class EventsAdapter extends AdapterAbstract
         } else {
 
             $response = $this->client->delete("projects/{$this->getResourceId()}/custom_events/{$this->eventId}");
-            
+
         }
 
         return $this->booleanResponse($response);

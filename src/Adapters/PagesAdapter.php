@@ -2,13 +2,8 @@
 
 namespace GrowthOptimized\Adapters;
 
-use GrowthOptimized\Adapters\EventsAdapter;
-
 use GrowthOptimized\Collections\PagesCollection;
-
 use GrowthOptimized\Items\Page;
-use GrowthOptimized\Items\Message;
-use GrowthOptimized\Items\Event;
 
 /**
  * Class GoalsAdapter
@@ -18,10 +13,10 @@ class PagesAdapter extends AdapterAbstract
 {
 
     /**
-    * @return mixed
-    */
+     * @return mixed
+     */
     public function all()
-    {   
+    {
         $response = $this->client->get("pages?project_id={$this->getResourceId()}");
 
         return PagesCollection::createFromJson($response->getBody()->getContents());
@@ -39,9 +34,9 @@ class PagesAdapter extends AdapterAbstract
 
         $attributes = array_merge($attributes, compact('name', 'edit_url', 'project_id'));
 
-        $response = $this->client->post("pages", $attributes); 
+        $response = $this->client->post("pages", $attributes);
 
-        return Page::createFromJson($response->getBody()->getContents());   
+        return Page::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -67,11 +62,11 @@ class PagesAdapter extends AdapterAbstract
     }
 
     /**
-    * @return null
-    */
+     * @return null
+     */
     public function delete()
     {
-    	$response = $this->client->delete("pages/{$this->getResourceId()}");
+        $response = $this->client->delete("pages/{$this->getResourceId()}");
 
         return $this->booleanResponse($response);
     }
