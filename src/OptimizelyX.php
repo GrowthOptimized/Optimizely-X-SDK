@@ -2,15 +2,15 @@
 
 namespace GrowthOptimized;
 
-use GuzzleHttp\ClientInterface;
-use GrowthOptimized\Adapters\AudiencesAdapter;
-use GrowthOptimized\Adapters\ExperimentsAdapter;
-use GrowthOptimized\Adapters\ProjectsAdapter;
-use GrowthOptimized\Adapters\CampaignsAdapter;
-use GrowthOptimized\Adapters\PagesAdapter;
-use GrowthOptimized\Adapters\EventsAdapter;
 use GrowthOptimized\Adapters\AttributesAdapter;
+use GrowthOptimized\Adapters\AudiencesAdapter;
+use GrowthOptimized\Adapters\CampaignsAdapter;
+use GrowthOptimized\Adapters\EventsAdapter;
+use GrowthOptimized\Adapters\ExperimentsAdapter;
+use GrowthOptimized\Adapters\PagesAdapter;
+use GrowthOptimized\Adapters\ProjectsAdapter;
 use GrowthOptimized\Http\Client;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Class Optimizely
@@ -44,12 +44,12 @@ class OptimizelyX
      */
     public static function create($token)
     {
-        
+
         $headers = ['Content-Type' => 'application/json', 'Authorization' => "Bearer {$token}"];
 
         $client = new Client([
             'base_uri' => self::BASE_URI,
-            'headers' => $headers
+            'headers' => $headers,
         ]);
 
         return new static($client);
@@ -108,7 +108,7 @@ class OptimizelyX
         return new PagesAdapter($this->client, $pageId);
     }
 
-        /**
+    /**
      * @param $eventId
      * @return EventAdapter
      */
@@ -117,7 +117,7 @@ class OptimizelyX
         return new EventsAdapter($this->client, $eventId);
     }
 
-            /**
+    /**
      * @param $attributeId
      * @return AttributeAdapter
      */

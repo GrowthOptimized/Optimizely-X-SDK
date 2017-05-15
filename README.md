@@ -131,7 +131,7 @@ $optimizely->project($projectId)->experiments()->create(
             "field" => "revenue"
         ]
     ],
-    [status => 'not started']
+    ['status' => 'not started']
 ]);
 ```
 Update an experiment
@@ -272,7 +272,7 @@ $optimizely->page($pageId)->events()->create(
     'click', 
     ['selector' => '.sign-up-btn'],
     ['category' => 'sign_up']
-)
+);
 ```
 
 Update In-Page Event
@@ -320,9 +320,36 @@ $optimizely->project($projectId)->event($customEventId)->delete();
 List Attributes
 
 ```php
-$optimizely->project($projectId)->attributes();
+$optimizely->project($projectId)->attributes()->all();
 ```
 
+Find Attribute
+
+```php
+$optimizely->attribute($attributeId)->find());
+```
+
+Create Attribute
+
+```php
+$optimizely->project($projectId)->attributes()->create(
+    'my new attribute',
+    'my_new_attribute',
+    ['description' => 'this is an attribute']
+);
+```
+
+Update Attribute
+
+```php
+$optimizely->attribute($attributeId)->update(['name' => 'this is my updated attribute']);
+```
+
+Delete Attribute
+
+```php
+$optimizely->attribute($attributeId)->delete());
+```
 
 ### Results
 

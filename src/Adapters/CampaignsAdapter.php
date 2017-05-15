@@ -14,10 +14,10 @@ class CampaignsAdapter extends AdapterAbstract
 {
 
     /**
-    * @return mixed
-    */
+     * @return mixed
+     */
     public function all()
-    { 
+    {
 
         $response = $this->client->get("campaigns?project_id={$this->getResourceId()}");
 
@@ -25,9 +25,9 @@ class CampaignsAdapter extends AdapterAbstract
     }
 
 
-	/**
-    * @return static
-    */
+    /**
+     * @return static
+     */
     public function find()
     {
         $response = $this->client->get("campaigns/{$this->getResourceId()}");
@@ -52,31 +52,33 @@ class CampaignsAdapter extends AdapterAbstract
     }
 
     /**
-    * @return mixed
-    */
+     * @return mixed
+     */
     public function results()
     {
-    	$response = $this->client->get("campaigns/{$this->getResourceId()}/results");
+        $response = $this->client->get("campaigns/{$this->getResourceId()}/results");
 
         return CampaignsCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
-    * @return static
-    */
+     * @return static
+     */
     public function update($attributes = [])
     {
-    	$response = $this->client->patch("campaigns/{$this->getResourceId()}", $attributes);
+        $response = $this->client->patch("campaigns/{$this->getResourceId()}", $attributes);
 
         return Campaign::createFromJson($response->getBody()->getContents());
     }
 
     /**
-    * @return request
-    */
+     * @return request
+     */
     public function delete()
     {
-    	return $this->client->delete("campaigns/{$this->getResourceId()}");
+        $response = $this->client->delete("campaigns/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
 }

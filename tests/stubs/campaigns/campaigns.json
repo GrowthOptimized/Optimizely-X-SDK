@@ -1,0 +1,41 @@
+[
+	{
+            "page_ids": [
+            	12345,
+            	54321
+            ],
+            "created": "2017-04-27T22:46:43.049220Z",
+            "status": "archived",
+            "last_modified": "2017-04-27T23:15:05.596300Z",
+            "project_id": 8356600104,
+            "name": "this is my new campaign, 1",
+            "id": 8360311524,
+            "holdback": 500
+	},
+      {
+            "page_ids": [
+            	12345,
+            	54321
+            ],
+            "created": "2017-04-27T22:46:43.049220Z",
+            "status": "archived",
+            "last_modified": "2017-04-27T23:15:05.596300Z",
+            "project_id": 8356600104,
+            "name": "this is my new campaign, 2",
+            "id": 8360311524,
+            "holdback": 500
+	},
+      {
+            "page_ids": [
+            	12345,
+            	54321
+            ],
+            "created": "2017-04-27T22:46:43.049220Z",
+            "status": "archived",
+            "last_modified": "2017-04-27T23:15:05.596300Z",
+            "project_id": 8356600104,
+            "name": "this is my new campaign, 3",
+            "id": 8360311524,
+            "holdback": 500
+	}
+]

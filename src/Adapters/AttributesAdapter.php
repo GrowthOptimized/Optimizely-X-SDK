@@ -3,7 +3,6 @@
 namespace GrowthOptimized\Adapters;
 
 use GrowthOptimized\Collections\AttributesCollection;
-
 use GrowthOptimized\Items\Attribute;
 
 /**
@@ -13,7 +12,7 @@ use GrowthOptimized\Items\Attribute;
 class AttributesAdapter extends AdapterAbstract
 {
 
-	/**
+    /**
      * @return mixed
      */
     public function all()
@@ -45,9 +44,9 @@ class AttributesAdapter extends AdapterAbstract
 
         $attributes = array_merge($attributes, compact('name', 'key', 'project_id'));
 
-        $response = $this->client->post("attributes", $attributes); 
+        $response = $this->client->post("attributes", $attributes);
 
-        return Attribute::createFromJson($response->getBody()->getContents());   
+        return Attribute::createFromJson($response->getBody()->getContents());
     }
 
     /**
@@ -62,11 +61,13 @@ class AttributesAdapter extends AdapterAbstract
     }
 
     /**
-    * @return request
-    */
+     * @return request
+     */
     public function delete()
     {
-        return $this->client->delete("attributes/{$this->getResourceId()}");
+        $response = $this->client->delete("attributes/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
 }

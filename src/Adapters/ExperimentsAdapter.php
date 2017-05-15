@@ -4,7 +4,6 @@ namespace GrowthOptimized\Adapters;
 
 use GrowthOptimized\Collections\ExperimentCollection;
 use GrowthOptimized\Collections\ResultCollection;
-
 use GrowthOptimized\Items\Experiment;
 
 /**
@@ -15,17 +14,18 @@ class ExperimentsAdapter extends AdapterAbstract
 {
 
     /**
-    * @return mixed
-    */
+     * @return mixed
+     */
     public function all()
-    {   
+    {
         $response = $this->client->get("experiments?project_id={$this->getResourceId()}");
+
         return ExperimentCollection::createFromJson($response->getBody()->getContents());
     }
 
     /**
-    * @return static
-    */
+     * @return static
+     */
     public function find()
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}");
@@ -52,23 +52,14 @@ class ExperimentsAdapter extends AdapterAbstract
     }
 
     /**
-     * @param array $attributes
-     * @return static
-     */
-    public function update(array $attributes)
-    {
-        $response = $this->client->patch("experiments/{$this->getResourceId()}", $attributes);
-
-        return Experiment::createFromJson($response->getBody()->getContents());
-    }
-
-    /**
-     * 
+     *
      * @return static
      */
     public function delete()
     {
-        return $this->client->delete("experiments/{$this->getResourceId()}");
+        $response = $this->client->delete("experiments/{$this->getResourceId()}");
+
+        return $this->booleanResponse($response);
     }
 
     /**
@@ -79,14 +70,25 @@ class ExperimentsAdapter extends AdapterAbstract
         return $this->update(['archived' => true]);
     }
 
+    /**
+     * @param array $attributes
+     * @return static
+     */
+    public function update(array $attributes)
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}", $attributes);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
     /*
      * @return static
      */
+
     public function results()
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}/results");
 
-        var_dump('here', $response->getBody());
         return ResultCollection::createFromJson($response->getBody()->getContents());
     }
 

@@ -13,10 +13,10 @@ class AudiencesAdapter extends AdapterAbstract
 {
 
     /**
-    * @return mixed
-    */
+     * @return mixed
+     */
     public function all()
-    { 
+    {
 
         $response = $this->client->get("audiences?project_id={$this->getResourceId()}");
 
@@ -35,9 +35,9 @@ class AudiencesAdapter extends AdapterAbstract
 
         $attributes = array_merge($attributes, compact('name', 'conditions', 'project_id'));
 
-        $response = $this->client->post("audiences", $attributes); 
+        $response = $this->client->post("audiences", $attributes);
 
-        return Audience::createFromJson($response->getBody()->getContents());   
+        return Audience::createFromJson($response->getBody()->getContents());
     }
 
 
@@ -48,6 +48,7 @@ class AudiencesAdapter extends AdapterAbstract
     public function find()
     {
         $response = $this->client->get("audiences/{$this->getResourceId()}");
+
         return Audience::createFromJson($response->getBody()->getContents());
     }
 

@@ -35,7 +35,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
         $client = $this->createMock(\GrowthOptimized\Http\Client::class);
         $client->method('get')->willReturn($response);
-        $client->method('put')->willReturn($response);
+        $client->method('patch')->willReturn($response);
         $client->method('post')->willReturn($response);
         $client->method('delete')->willReturn($deleteResponse);
 

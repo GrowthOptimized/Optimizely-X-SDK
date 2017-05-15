@@ -3,6 +3,7 @@
 namespace GrowthOptimized\Http;
 
 use GuzzleHttp\Client as BaseClient;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class HttpClient
@@ -34,7 +35,7 @@ class Client extends BaseClient
      * @param $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function patch($endpoint, $options)
+    public function patch($endpoint, array $options = [])
     {
         return $this->request('PATCH', $endpoint, ['body' => json_encode($options)]);
     }

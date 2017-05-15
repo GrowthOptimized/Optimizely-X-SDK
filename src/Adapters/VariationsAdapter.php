@@ -11,15 +11,15 @@ use GrowthOptimized\Items\Experiment;
 class VariationsAdapter extends AdapterAbstract
 {
 
-	/**
+    /**
      * @param array $variations
      * @return static
      */
     public function update(array $variations)
     {
         $response = $this->client->patch(
-        	"experiments/{$this->getResourceId()}", 
-        	["variations" => $variations]
+            "experiments/{$this->getResourceId()}",
+            ["variations" => $variations]
         );
 
         return Experiment::createFromJson($response->getBody()->getContents());

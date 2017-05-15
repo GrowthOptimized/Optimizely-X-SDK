@@ -2,14 +2,7 @@
 
 namespace GrowthOptimized\Adapters;
 
-use GrowthOptimized\Adapters\EventsAdapter;
-use GrowthOptimized\Adapters\CampaignsAdapter;
-use GrowthOptimized\Adapters\ExperimentsAdapter;
-use GrowthOptimized\Adapters\AudiencesAdapter;
-use GrowthOptimized\Adapters\AttributesAdapter;
-
 use GrowthOptimized\Collections\ProjectCollection;
-
 use GrowthOptimized\Items\Project;
 
 /**
@@ -24,6 +17,7 @@ class ProjectsAdapter extends AdapterAbstract
     public function all()
     {
         $response = $this->client->get('projects');
+
         return ProjectCollection::createFromJson($response->getBody()->getContents());
     }
 
@@ -60,7 +54,7 @@ class ProjectsAdapter extends AdapterAbstract
     public function activate()
     {
         return $this->update([
-            'status' => Project::STATUS_ACTIVE
+            'status' => Project::STATUS_ACTIVE,
         ]);
     }
 
@@ -81,7 +75,7 @@ class ProjectsAdapter extends AdapterAbstract
     public function archive()
     {
         return $this->update([
-            'status' => Project::STATUS_ARCHIVED
+            'status' => Project::STATUS_ARCHIVED,
         ]);
     }
 
@@ -118,8 +112,8 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
-    * @return EventsAdapter
-    */
+     * @return EventsAdapter
+     */
     public function events()
     {
         return new EventsAdapter($this->client, $this->getResourceId());
@@ -135,9 +129,9 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
-    * @param $projectId
-    * @return mixed
-    */
+     * @param $projectId
+     * @return mixed
+     */
     public function attributes()
     {
         return new AttributesAdapter($this->client, $this->getResourceId());

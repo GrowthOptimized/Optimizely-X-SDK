@@ -14,8 +14,8 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audiences');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
-        $audiences = $optimizely->projects()->audiences('1');
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $audiences = $optimizely->project('1')->audiences()->all();
 
         $this->assertInstanceOf(\GrowthOptimized\Collections\AudienceCollection::class, $audiences);
         $this->assertObjectHasAttribute('items', $audiences);
@@ -29,8 +29,8 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audience');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
-        $audience = $optimizely->audiences()->find('1');
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $audience = $optimizely->audience('1')->find();
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
@@ -41,8 +41,13 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audience');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
-        $audience = $optimizely->project('1')->createAudience("Canadians");
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+
+       $audience = $optimizely->project('1')->audiences()->create(
+                    'My Test Audience', 
+                    '[\"and\", {\"type\": \"language\", \"value\": \"es\"}, {\"type\": \"location\", \"value\": \"US-CA-SANFRANCISCO\"}]',
+                    ["description" => 'People that speak spanish in San Fran']
+                );
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
@@ -53,8 +58,13 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audience');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
-        $audience = $optimizely->audience('1')->update(['name' => 'Canadians']);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $audience = $optimizely->audience('1')->update(
+                        [
+                            "name" => 'My test update',
+                            "description" => 'People that speak spanish in San Fran'
+                        ]
+                    );
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());

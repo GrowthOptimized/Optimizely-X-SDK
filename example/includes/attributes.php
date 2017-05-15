@@ -8,8 +8,8 @@
 
 // Create Attribute
 // var_dump($optimizely->project($projectId)->attributes()->create(
-// 	'my new attribute',
-// 	'my_new_attribute',
+// 	'my newer attribute',
+// 	'my_newer_attribute',
 // 	['description' => 'this is an attribute']
 // ));
 

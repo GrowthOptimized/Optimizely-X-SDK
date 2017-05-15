@@ -14,7 +14,7 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/projects');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $projects = $optimizely->projects()->all();
 
         $this->assertInstanceOf(\GrowthOptimized\Collections\ProjectCollection::class, $projects);
@@ -29,7 +29,7 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $project = $optimizely->projects()->find('1');
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Project::class, $project);
@@ -41,7 +41,7 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $project = $optimizely->projects()->create('My even newer project name');
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Project::class, $project);
@@ -53,7 +53,7 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $project = $optimizely->project('1')->update(['project_name' => 'My even newer project name']);
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Project::class, $project);
@@ -65,7 +65,7 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $project = $optimizely->project('1')->activate();
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Project::class, $project);
@@ -77,7 +77,7 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\Optimizely($client);
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $project = $optimizely->project('1')->archive();
 
         $this->assertInstanceOf(\GrowthOptimized\Items\Project::class, $project);

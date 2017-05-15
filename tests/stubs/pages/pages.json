@@ -1,0 +1,26 @@
+[
+	{
+		"id": 8378422265,
+		"project_id": 8345173685,
+		"edit_url": "http://www.widerfunnel.com/categories/11",
+		"key": "8345173685_new_category_page",
+		"last_modified": "2017-05-12T06:35:32.444110Z",
+		"category": "article",
+		"created": "2017-05-12T06:35:32.444100Z",
+		"name": "my testing page 1",
+		"activation_type": "immediate",
+		"archived": false
+	},
+	{
+		"id": 8378422265,
+		"project_id": 8345173685,
+		"edit_url": "http://www.widerfunnel.com/categories/11",
+		"key": "8345173685_new_category_page",
+		"last_modified": "2017-05-12T06:35:32.444110Z",
+		"category": "article",
+		"created": "2017-05-12T06:35:32.444100Z",
+		"name": "my testing page 2",
+		"activation_type": "immediate",
+		"archived": false
+	}
+]
