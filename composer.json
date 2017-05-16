@@ -1,13 +1,13 @@
 {
-    "name": "growthoptimized/optimizely-sdk",
+    "name": "growthoptimized/optimizely-x-sdk",
     "type": "library",
     "description": "Optimizely API PHP SDK",
     "license": "MIT",
     "authors": [
         {
-            "name": "Valentin Prugnaud",
-            "email": "valentin.prugnaud@widerfunnel.com",
-            "homepage": "https://github.com/GrowthOptimized/Optimizely-SDK"
+            "name": "Thomas J. Davis",
+            "email": "thomas.davis@widerfunnel.com",
+            "homepage": "https://github.com/GrowthOptimized/Optimizely-X-SDK"
         }
     ],
     "keywords": [
