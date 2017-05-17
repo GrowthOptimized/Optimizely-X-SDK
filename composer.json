@@ -1,7 +1,7 @@
 {
     "name": "growthoptimized/optimizely-x-sdk",
     "type": "library",
-    "description": "Optimizely API PHP SDK",
+    "description": "Optimizely REST API SDK Wrapper",
     "license": "MIT",
     "authors": [
         {
@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "GrowthOptimized\\":"src"
+            "GrowthOptimized\\OptimizelyX\\":"src"
         }
     },
     "autoload-dev": {
