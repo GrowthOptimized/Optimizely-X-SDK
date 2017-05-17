@@ -11,7 +11,7 @@ composer require growthoptimized/optimizely-x-sdk
 Simply create an Optimizely object, with a valid OAuth Token in the constructor: 
 
 ```php
-$optimizely = Optimizely::create($token);
+$optimizely = OptimizelyX::create($token);
 ```
 
 List projects
