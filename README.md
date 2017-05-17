@@ -14,12 +14,6 @@ Simply create an Optimizely object, with a valid OAuth Token in the constructor:
 $optimizely = Optimizely::create($token);
 ```
 
-If you wish to use the token based authentication, simply pass `true` as a second argument: 
-
-```php
-$optimizely = Optimizely::create($token, true);
-```
-
 List projects
 
 ```php
