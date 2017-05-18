@@ -19,9 +19,9 @@ class PagesTest extends TestCase
         
         $pages = $optimizely->project('1')->pages()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\PagesCollection::class, $pages);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\PagesCollection::class, $pages);
         $this->assertObjectHasAttribute('items', $pages);
-        $this->assertInstanceOf(\GrowthOptimized\Items\Page::class, $pages->first());
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $pages->first());
         $this->assertObjectHasAttribute('id', $pages->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/pages'), $pages->toJson());
     }
@@ -34,7 +34,7 @@ class PagesTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $page = $optimizely->page('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Page::class, $page);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $page);
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/page'), $page->toJson());
     }
 
@@ -51,7 +51,7 @@ class PagesTest extends TestCase
        					['category' => 'article']
        				);
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Page::class, $page);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $page);
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/page'), $page->toJson());
     }
 
@@ -63,7 +63,7 @@ class PagesTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $page = $optimizely->page('1')->update(['name' => 'my updated name']);
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Page::class, $page);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $page);
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/page'), $page->toJson());
     }
 

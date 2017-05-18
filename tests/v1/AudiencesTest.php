@@ -17,9 +17,9 @@ class AudiencesTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $audiences = $optimizely->project('1')->audiences()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\AudienceCollection::class, $audiences);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\AudienceCollection::class, $audiences);
         $this->assertObjectHasAttribute('items', $audiences);
-        $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audiences->first());
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audiences->first());
         $this->assertObjectHasAttribute('id', $audiences->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audiences'), $audiences->toJson());
     }
@@ -32,7 +32,7 @@ class AudiencesTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $audience = $optimizely->audience('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audience);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
     }
 
@@ -49,7 +49,7 @@ class AudiencesTest extends TestCase
                     ["description" => 'People that speak spanish in San Fran']
                 );
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audience);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
     }
 
@@ -59,6 +59,7 @@ class AudiencesTest extends TestCase
         $client = $this->fakeClient('audiences/audience');
 
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
+
         $audience = $optimizely->audience('1')->update(
                         [
                             "name" => 'My test update',
@@ -66,7 +67,7 @@ class AudiencesTest extends TestCase
                         ]
                     );
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Audience::class, $audience);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
     }
 }

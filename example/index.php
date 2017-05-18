@@ -10,7 +10,7 @@ $dotenv->load();
 
 $token = getenv('OPTIMIZELY_TOKEN');
 
-$projectId = 8345173685;
+$projectId = 8395421185;
 $campaignId = 8358133715;
 $experimentId = 8348094537;
 $variationId = 7379901245;

@@ -12,7 +12,7 @@
 
 // Create an experiment
 // var_dump($optimizely->project($projectId)->experiments()->create(
-// 	'my experiment',
+// 	'my experiment 2',
 //     [
 // 	    [
 // 			"name" => "control",

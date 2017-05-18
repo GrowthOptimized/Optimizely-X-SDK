@@ -19,9 +19,9 @@ class AttributesTest extends TestCase
         
         $attributes = $optimizely->project('1')->attributes()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\AttributesCollection::class, $attributes);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\AttributesCollection::class, $attributes);
         $this->assertObjectHasAttribute('items', $attributes);
-        $this->assertInstanceOf(\GrowthOptimized\Items\Attribute::class, $attributes->first());
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attributes->first());
         $this->assertObjectHasAttribute('id', $attributes->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attributes'), $attributes->toJson());
     }
@@ -34,7 +34,7 @@ class AttributesTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $attribute = $optimizely->attribute('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Attribute::class, $attribute);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attribute);
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attribute'), $attribute->toJson());
     }
 
@@ -51,7 +51,7 @@ class AttributesTest extends TestCase
     					['description' => 'this is a testing attribute']
 					);
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Attribute::class, $attribute);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attribute);
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attribute'), $attribute->toJson());
     }
     
@@ -68,7 +68,7 @@ class AttributesTest extends TestCase
                         ]
                     );
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Attribute::class, $attribute);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attribute);
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attribute'), $attribute->toJson());
     }
 

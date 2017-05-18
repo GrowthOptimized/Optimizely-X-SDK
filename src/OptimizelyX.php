@@ -2,14 +2,14 @@
 
 namespace GrowthOptimized;
 
-use GrowthOptimized\Adapters\AttributesAdapter;
-use GrowthOptimized\Adapters\AudiencesAdapter;
-use GrowthOptimized\Adapters\CampaignsAdapter;
-use GrowthOptimized\Adapters\EventsAdapter;
-use GrowthOptimized\Adapters\ExperimentsAdapter;
-use GrowthOptimized\Adapters\PagesAdapter;
-use GrowthOptimized\Adapters\ProjectsAdapter;
-use GrowthOptimized\Http\Client;
+use GrowthOptimized\OptimizelyX\Adapters\AttributesAdapter;
+use GrowthOptimized\OptimizelyX\Adapters\AudiencesAdapter;
+use GrowthOptimized\OptimizelyX\Adapters\CampaignsAdapter;
+use GrowthOptimized\OptimizelyX\Adapters\EventsAdapter;
+use GrowthOptimized\OptimizelyX\Adapters\ExperimentsAdapter;
+use GrowthOptimized\OptimizelyX\Adapters\PagesAdapter;
+use GrowthOptimized\OptimizelyX\Adapters\ProjectsAdapter;
+use GrowthOptimized\OptimizelyX\Http\Client;
 use GuzzleHttp\ClientInterface;
 
 /**
