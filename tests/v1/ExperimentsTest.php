@@ -17,9 +17,9 @@ class ExperimentsTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $experiments = $optimizely->project('1')->experiments()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\ExperimentCollection::class, $experiments);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\ExperimentCollection::class, $experiments);
         $this->assertObjectHasAttribute('items', $experiments);
-        $this->assertInstanceOf(\GrowthOptimized\Items\Experiment::class, $experiments->first());
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiments->first());
         $this->assertObjectHasAttribute('id', $experiments->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiments'), $experiments->toJson());
     }
@@ -32,7 +32,7 @@ class ExperimentsTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $experiment = $optimizely->experiment('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Experiment::class, $experiment);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
         $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
     }
 
@@ -64,7 +64,7 @@ class ExperimentsTest extends TestCase
                             ['status' => 'not started']
                         );
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Experiment::class, $experiment);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
         $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
     }
 
@@ -78,7 +78,7 @@ class ExperimentsTest extends TestCase
             'description' => 'Wordpress: 10 Reasons Why Your Agency Should Offer Optimization '
         ]);
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Experiment::class, $experiment);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
         $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
     }
 
@@ -90,7 +90,7 @@ class ExperimentsTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $experiment = $optimizely->experiment('1')->archive();
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Experiment::class, $experiment);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
         $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
     }
 
@@ -113,9 +113,9 @@ class ExperimentsTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $results = $optimizely->experiment('1')->results();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\ResultCollection::class, $results);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\ResultCollection::class, $results);
         $this->assertObjectHasAttribute('items', $results);
-        $this->assertInstanceOf(\GrowthOptimized\Items\Result::class, $results->first());
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Result::class, $results->first());
         $this->assertObjectHasAttribute('variation_id', $results->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('results/results'), $results->toJson());
     }

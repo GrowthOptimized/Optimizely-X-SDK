@@ -19,9 +19,9 @@ class CampaignTest extends TestCase
         
         $campaigns = $optimizely->project('1')->campaigns()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\CampaignsCollection::class, $campaigns);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\CampaignsCollection::class, $campaigns);
         $this->assertObjectHasAttribute('items', $campaigns);
-        $this->assertInstanceOf(\GrowthOptimized\Items\Campaign::class, $campaigns->first());
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaigns->first());
         $this->assertObjectHasAttribute('id', $campaigns->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaigns'), $campaigns->toJson());
     }
@@ -34,7 +34,7 @@ class CampaignTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $campaign = $optimizely->campaign('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Campaign::class, $campaign);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaign);
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaign'), $campaign->toJson());
     }
 
@@ -50,7 +50,7 @@ class CampaignTest extends TestCase
     					["status" => "not_started"]
 					);
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Campaign::class, $campaign);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaign);
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaign'), $campaign->toJson());
     }
 
@@ -64,7 +64,7 @@ class CampaignTest extends TestCase
     					'name' => 'this is my new campaign'
 					]);
 
-        $this->assertInstanceOf(\GrowthOptimized\Items\Campaign::class, $campaign);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaign);
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaign'), $campaign->toJson());
     }
 

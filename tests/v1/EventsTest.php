@@ -3,7 +3,7 @@
 namespace GrowthOptimized\Tests\v1;
 
 use GrowthOptimized\Tests\TestCase;
-use GrowthOptimized\Items\Event;
+use GrowthOptimized\OptimizelyX\Items\Event;
 
 /**
  * Class GoalsTest
@@ -18,7 +18,7 @@ class EventsTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $goals = $optimizely->project('1')->events()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\Collections\EventsCollection::class, $goals);
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\EventsCollection::class, $goals);
         $this->assertObjectHasAttribute('items', $goals);
         $this->assertInstanceOf(Event::class, $goals->first());
         $this->assertObjectHasAttribute('id', $goals->first());
