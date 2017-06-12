@@ -1,3 +1,7 @@
+# OPTIMIZELY X PHP SDK
+[![Packagist](https://img.shields.io/packagist/v/GrowthOptimized/optimizely-x-sdk.svg?maxAge=2592000?style=flat-square)](https://packagist.org/packages/growthoptimized/optimizely-x-sdk)
+[![Travis](https://img.shields.io/travis/GrowthOptimized/optimizely-x-sdk/master.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/growthoptimized/optimizely-x-sdk)
+
 PHP Wrapper to interact with the Optimizely X API.
 
 ## Installation
