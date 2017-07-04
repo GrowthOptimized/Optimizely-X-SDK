@@ -4,7 +4,7 @@
 // var_dump($optimizely->project($projectId)->events()->all());
 
 // Find Event
-// var_dump($optimizely->event($eventId)->find());
+var_dump($optimizely->event($customEventId)->find());
 
 // Create In-page Event
 // var_dump($optimizely->page($pageId)->events()->create(
@@ -17,8 +17,8 @@
 // Create Custom Event
 // var_dump($optimizely->project($projectId)->events()->create([
 // 	'event_type' => 'custom',
-// 	'name' => 'my new custom event',
-// 	'key' => 'my_new_event_key'
+// 	'name' => 'my new custom event 3',
+// 	'key' => 'my_new_event_key_3'
 // ]));
 
 // Update In-Page Event
