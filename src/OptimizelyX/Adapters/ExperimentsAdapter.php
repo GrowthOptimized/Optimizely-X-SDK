@@ -2,8 +2,6 @@
 
 namespace GrowthOptimized\OptimizelyX\Adapters;
 
-use GrowthOptimize\OptimizelyX\Adapters\VariationsAdapter;
-
 use GrowthOptimized\OptimizelyX\Collections\ExperimentCollection;
 use GrowthOptimized\OptimizelyX\Collections\ResultCollection;
 use GrowthOptimized\OptimizelyX\Items\Experiment;
@@ -14,7 +12,6 @@ use GrowthOptimized\OptimizelyX\Items\Experiment;
  */
 class ExperimentsAdapter extends AdapterAbstract
 {
-
     /**
      * @return mixed
      */
@@ -54,7 +51,6 @@ class ExperimentsAdapter extends AdapterAbstract
     }
 
     /**
-     *
      * @return static
      */
     public function delete()
@@ -103,5 +99,4 @@ class ExperimentsAdapter extends AdapterAbstract
 
         return new VariationsAdapter($this->client, $project_id);
     }
-
 }

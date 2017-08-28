@@ -38,11 +38,11 @@ class OptimizelyX
     }
 
     /**
-     * @param $token
-     * @param bool $oauth
+     * @param $access_token
+     * @param $refresh_token
      * @return static
      */
-    public static function create($token)
+    public static function create($access_token, $refresh_token = null)
     {
 
         $headers = ['Content-Type' => 'application/json', 'Authorization' => "Bearer {$token}"];
@@ -125,5 +125,4 @@ class OptimizelyX
     {
         return new AttributesAdapter($this->client, $attributeId);
     }
-
 }

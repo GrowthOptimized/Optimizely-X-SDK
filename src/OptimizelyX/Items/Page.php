@@ -8,4 +8,5 @@ namespace GrowthOptimized\OptimizelyX\Items;
  */
 class Page extends ItemAbstract
 {
+    //
 }
