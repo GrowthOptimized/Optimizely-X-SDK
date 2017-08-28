@@ -8,5 +8,5 @@ namespace GrowthOptimized\OptimizelyX\Items;
  */
 class Event extends ItemAbstract
 {
-
+    //
 }

@@ -11,7 +11,6 @@ use GrowthOptimized\OptimizelyX\Items\Attribute;
  */
 class AttributesAdapter extends AdapterAbstract
 {
-
     /**
      * @return mixed
      */
@@ -69,5 +68,4 @@ class AttributesAdapter extends AdapterAbstract
 
         return $this->booleanResponse($response);
     }
-
 }

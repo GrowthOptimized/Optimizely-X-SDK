@@ -64,5 +64,4 @@ abstract class ItemAbstract implements Arrayable, Jsonable
 
         return $data;
     }
-
 }

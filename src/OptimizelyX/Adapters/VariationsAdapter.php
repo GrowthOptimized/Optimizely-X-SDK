@@ -10,7 +10,6 @@ use GrowthOptimized\OptimizelyX\Items\Experiment;
  */
 class VariationsAdapter extends AdapterAbstract
 {
-
     /**
      * @param array $variations
      * @return static
@@ -24,5 +23,4 @@ class VariationsAdapter extends AdapterAbstract
 
         return Experiment::createFromJson($response->getBody()->getContents());
     }
-
 }
