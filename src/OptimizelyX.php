@@ -45,7 +45,7 @@ class OptimizelyX
     public static function create($access_token, $refresh_token = null)
     {
 
-        $headers = ['Content-Type' => 'application/json', 'Authorization' => "Bearer {$token}"];
+        $headers = ['Content-Type' => 'application/json', 'Authorization' => "Bearer {$access_token}"];
 
         $client = new Client([
             'base_uri' => self::BASE_URI,
