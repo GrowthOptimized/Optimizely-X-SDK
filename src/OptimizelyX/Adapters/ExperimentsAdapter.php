@@ -12,6 +12,13 @@ use GrowthOptimized\OptimizelyX\Items\Experiment;
  */
 class ExperimentsAdapter extends AdapterAbstract
 {
+    const ACTION_PUBLISH = 'publish';
+    const ACTION_START = 'start';
+    const ACTION_PAUSE = 'pause';
+    const ACTION_RESUME = 'resume';
+    const ACTION_COMPLETE = 'pause';
+    const ACTION_UNARCHIVE = 'unarchive';
+
     /**
      * @return mixed
      */
@@ -67,7 +74,67 @@ class ExperimentsAdapter extends AdapterAbstract
      */
     public function archive()
     {
-        return $this->update(['archived' => true]);
+        return $this->delete();
+    }
+
+    /**
+     * @return static
+     */
+    public function unarchive()
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}?action=".self::ACTION_UNARCHIVE);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return static
+     */
+    public function publish()
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}?action=".self::ACTION_PUBLISH);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return static
+     */
+    public function start()
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}?action=".self::ACTION_START);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return static
+     */
+    public function pause()
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}?action=".self::ACTION_PAUSE);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return static
+     */
+    public function resume()
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}?action=".self::ACTION_RESUME);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
+    }
+
+    /**
+     * @return static
+     */
+    public function complete()
+    {
+        $response = $this->client->patch("experiments/{$this->getResourceId()}?action=".self::ACTION_COMPLETE);
+
+        return Experiment::createFromJson($response->getBody()->getContents());
     }
 
     /**
