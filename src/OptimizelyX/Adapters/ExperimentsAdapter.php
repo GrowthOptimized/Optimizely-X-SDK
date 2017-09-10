@@ -39,9 +39,11 @@ class ExperimentsAdapter extends AdapterAbstract
      * @param array $attributes
      * @return static
      */
-    public function create(string $name, array $variations, array $metrics = [[]], array $attributes = [])
+    public function create(string $name, array $variations, array $metrics = null, array $attributes = [])
     {
         $project_id = $this->getResourceId();
+
+        $metrics = $metrics ?? [new \stdClass];
 
         $attributes = array_merge($attributes, compact('name', 'variations', 'metrics', 'project_id'));
 
