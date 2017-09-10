@@ -39,7 +39,7 @@ class ExperimentsAdapter extends AdapterAbstract
      * @param array $attributes
      * @return static
      */
-    public function create(string $name, array $variations, array $metrics = [], array $attributes = [])
+    public function create(string $name, array $variations, array $metrics = [[]], array $attributes = [])
     {
         $project_id = $this->getResourceId();
 
