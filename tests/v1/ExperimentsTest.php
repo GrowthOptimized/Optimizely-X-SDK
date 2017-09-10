@@ -90,6 +90,65 @@ class ExperimentsTest extends TestCase
         $optimizely = new \GrowthOptimized\OptimizelyX($client);
         $experiment = $optimizely->experiment('1')->archive();
 
+        $this->assertTrue($experiment);
+    }
+
+    /** @test */
+    public function it_can_unarchive_an_experiment()
+    {
+        $client = $this->fakeClient('experiments/experiment');
+
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $experiment = $optimizely->experiment('1')->unarchive();
+
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
+        $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
+    }
+
+    /** @test */
+    public function it_can_publish_an_experiment()
+    {
+        $client = $this->fakeClient('experiments/experiment');
+
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $experiment = $optimizely->experiment('1')->publish();
+
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
+        $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
+    }
+
+    /** @test */
+    public function it_can_start_an_experiment()
+    {
+        $client = $this->fakeClient('experiments/experiment');
+
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $experiment = $optimizely->experiment('1')->start();
+
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
+        $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
+    }
+
+    /** @test */
+    public function it_can_complete_an_experiment()
+    {
+        $client = $this->fakeClient('experiments/experiment');
+
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $experiment = $optimizely->experiment('1')->complete();
+
+        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
+        $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
+    }
+
+    /** @test */
+    public function it_can_resume_an_experiment()
+    {
+        $client = $this->fakeClient('experiments/experiment');
+
+        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $experiment = $optimizely->experiment('1')->resume();
+
         $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Experiment::class, $experiment);
         $this->assertJsonStringEqualsJsonFile($this->getStub('experiments/experiment'), $experiment->toJson());
     }
