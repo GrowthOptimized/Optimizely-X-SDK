@@ -61,7 +61,9 @@ class Client extends BaseClient
     public function call($method, $endpoint, array $options = [])
     {
         try {
-            $response = $this->request($method, $endpoint, ['body' => json_encode($options)]);
+            $response = $this->request($method, $endpoint, [
+                'body' => count($options) > 0 ? json_encode($options) : json_encode(new \stdClass)
+            ]);
         } catch (RequestException $exception) {
             $response = $exception->getResponse();
         }
