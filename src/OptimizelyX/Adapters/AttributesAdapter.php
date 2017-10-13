@@ -1,13 +1,13 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\AttributesCollection;
-use GrowthOptimized\OptimizelyX\Items\Attribute;
+use WiderFunnel\OptimizelyX\Collections\AttributesCollection;
+use WiderFunnel\OptimizelyX\Items\Attribute;
 
 /**
  * Class AttributesAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class AttributesAdapter extends AdapterAbstract
 {

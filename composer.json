@@ -1,5 +1,5 @@
 {
-    "name": "growthoptimized/optimizely-x-sdk",
+    "name": "widerfunnel/optimizely-x-sdk",
     "type": "library",
     "description": "Optimizely REST API SDK Wrapper",
     "license": "MIT",
@@ -7,7 +7,7 @@
         {
             "name": "Thomas J. Davis",
             "email": "thomas.davis@widerfunnel.com",
-            "homepage": "https://github.com/GrowthOptimized/Optimizely-X-SDK"
+            "homepage": "https://github.com/WiderFunnel/Optimizely-X-SDK"
         }
     ],
     "keywords": [
@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GrowthOptimized\\":"src"
+            "WiderFunnel\\":"src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GrowthOptimized\\Tests\\":"tests"
+            "WiderFunnel\\Tests\\":"tests"
         }
     }
 }

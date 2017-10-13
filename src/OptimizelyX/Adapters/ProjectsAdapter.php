@@ -1,13 +1,13 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\ProjectCollection;
-use GrowthOptimized\OptimizelyX\Items\Project;
+use WiderFunnel\OptimizelyX\Collections\ProjectCollection;
+use WiderFunnel\OptimizelyX\Items\Project;
 
 /**
  * Class ProjectsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class ProjectsAdapter extends AdapterAbstract
 {
@@ -37,7 +37,7 @@ class ProjectsAdapter extends AdapterAbstract
     /**
      * @param string $name
      * @param array $attributes
-     * @return \GrowthOptimized\OptimizelyX\Items\Project
+     * @return \WiderFunnel\OptimizelyX\Items\Project
      */
     public function create(string $name, array $attributes = [])
     {

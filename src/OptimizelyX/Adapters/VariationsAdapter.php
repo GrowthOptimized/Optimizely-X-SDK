@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Items\Experiment;
+use WiderFunnel\OptimizelyX\Items\Experiment;
 
 /**
  * Class VariationsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class VariationsAdapter extends AdapterAbstract
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace GrowthOptimized\Tests\v1;
+namespace WiderFunnel\Tests\v1;
 
-use GrowthOptimized\Tests\TestCase;
+use WiderFunnel\Tests\TestCase;
 
 /**
  * Class AttributesTest
@@ -15,13 +15,13 @@ class AttributesTest extends TestCase
     {
         $client = $this->fakeClient('attributes/attributes');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         
         $attributes = $optimizely->project('1')->attributes()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\AttributesCollection::class, $attributes);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\AttributesCollection::class, $attributes);
         $this->assertObjectHasAttribute('items', $attributes);
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attributes->first());
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Attribute::class, $attributes->first());
         $this->assertObjectHasAttribute('id', $attributes->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attributes'), $attributes->toJson());
     }
@@ -31,10 +31,10 @@ class AttributesTest extends TestCase
     {
         $client = $this->fakeClient('attributes/attribute');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $attribute = $optimizely->attribute('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attribute);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Attribute::class, $attribute);
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attribute'), $attribute->toJson());
     }
 
@@ -43,7 +43,7 @@ class AttributesTest extends TestCase
     {
         $client = $this->fakeClient('attributes/attribute');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
 
        	$attribute = $optimizely->project('1')->attributes()->create(
     					'my testing attribute',
@@ -51,7 +51,7 @@ class AttributesTest extends TestCase
     					['description' => 'this is a testing attribute']
 					);
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attribute);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Attribute::class, $attribute);
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attribute'), $attribute->toJson());
     }
     
@@ -60,7 +60,7 @@ class AttributesTest extends TestCase
     {
         $client = $this->fakeClient('attributes/attribute');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $attribute = $optimizely->attribute('1')->update(
                         [
                             "name" => 'My test update',
@@ -68,7 +68,7 @@ class AttributesTest extends TestCase
                         ]
                     );
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Attribute::class, $attribute);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Attribute::class, $attribute);
         $this->assertJsonStringEqualsJsonFile($this->getStub('attributes/attribute'), $attribute->toJson());
     }
 
@@ -77,7 +77,7 @@ class AttributesTest extends TestCase
     {
         $client = $this->fakeClient('attributes/attribute');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $attribute = $optimizely->experiment('1')->delete();
 
         $this->assertTrue($attribute);

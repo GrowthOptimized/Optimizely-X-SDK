@@ -1,8 +1,8 @@
 <?php
 
-namespace GrowthOptimized\Tests\v1;
+namespace WiderFunnel\Tests\v1;
 
-use GrowthOptimized\Tests\TestCase;
+use WiderFunnel\Tests\TestCase;
 
 /**
  * Class AudiencesTest
@@ -14,12 +14,12 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audiences');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $audiences = $optimizely->project('1')->audiences()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\AudienceCollection::class, $audiences);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\AudienceCollection::class, $audiences);
         $this->assertObjectHasAttribute('items', $audiences);
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audiences->first());
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Audience::class, $audiences->first());
         $this->assertObjectHasAttribute('id', $audiences->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audiences'), $audiences->toJson());
     }
@@ -29,10 +29,10 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audience');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $audience = $optimizely->audience('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audience);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
     }
 
@@ -41,7 +41,7 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audience');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
 
        $audience = $optimizely->project('1')->audiences()->create(
                     'My Test Audience', 
@@ -49,7 +49,7 @@ class AudiencesTest extends TestCase
                     ["description" => 'People that speak spanish in San Fran']
                 );
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audience);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
     }
 
@@ -58,7 +58,7 @@ class AudiencesTest extends TestCase
     {
         $client = $this->fakeClient('audiences/audience');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
 
         $audience = $optimizely->audience('1')->update(
                         [
@@ -67,7 +67,7 @@ class AudiencesTest extends TestCase
                         ]
                     );
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Audience::class, $audience);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Audience::class, $audience);
         $this->assertJsonStringEqualsJsonFile($this->getStub('audiences/audience'), $audience->toJson());
     }
 }

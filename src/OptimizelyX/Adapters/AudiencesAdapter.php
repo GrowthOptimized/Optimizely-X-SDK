@@ -1,13 +1,13 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\AudienceCollection;
-use GrowthOptimized\OptimizelyX\Items\Audience;
+use WiderFunnel\OptimizelyX\Collections\AudienceCollection;
+use WiderFunnel\OptimizelyX\Items\Audience;
 
 /**
  * Class AudiencesAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class AudiencesAdapter extends AdapterAbstract
 {

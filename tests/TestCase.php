@@ -1,6 +1,6 @@
 <?php
 
-namespace GrowthOptimized\Tests;
+namespace WiderFunnel\Tests;
 
 use PHPUnit_Framework_TestCase;
 
@@ -33,7 +33,7 @@ class TestCase extends PHPUnit_Framework_TestCase
         $deleteResponse->method('getBody')->willReturn(null);
         $deleteResponse->method('getStatusCode')->willReturn(204);
 
-        $client = $this->createMock(\GrowthOptimized\OptimizelyX\Http\Client::class);
+        $client = $this->createMock(\WiderFunnel\OptimizelyX\Http\Client::class);
         $client->method('get')->willReturn($response);
         $client->method('patch')->willReturn($response);
         $client->method('post')->willReturn($response);

@@ -1,13 +1,13 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\PagesCollection;
-use GrowthOptimized\OptimizelyX\Items\Page;
+use WiderFunnel\OptimizelyX\Collections\PagesCollection;
+use WiderFunnel\OptimizelyX\Items\Page;
 
 /**
  * Class GoalsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class PagesAdapter extends AdapterAbstract
 {
@@ -80,7 +80,7 @@ class PagesAdapter extends AdapterAbstract
 
     /**
      * @param null $eventId
-     * @return \GrowthOptimized\OptimizelyX\Adapters\EventsAdapter
+     * @return \WiderFunnel\OptimizelyX\Adapters\EventsAdapter
      */
     public function events($eventId = null)
     {
