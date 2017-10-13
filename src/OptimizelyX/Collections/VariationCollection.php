@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Collections;
+namespace WiderFunnel\OptimizelyX\Collections;
 
-use GrowthOptimized\OptimizelyX\Items\Variation;
+use WiderFunnel\OptimizelyX\Items\Variation;
 
 /**
  * Class VariationCollection
- * @package GrowthOptimized\Collections
+ * @package WiderFunnel\Collections
  */
 class VariationCollection extends CollectionAbstract
 {

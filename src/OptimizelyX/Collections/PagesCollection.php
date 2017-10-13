@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Collections;
+namespace WiderFunnel\OptimizelyX\Collections;
 
-use GrowthOptimized\OptimizelyX\Items\Page;
+use WiderFunnel\OptimizelyX\Items\Page;
 
 /**
  * Class ResultCollection
- * @package GrowthOptimized\Collections
+ * @package WiderFunnel\Collections
  */
 class PagesCollection extends CollectionAbstract
 {

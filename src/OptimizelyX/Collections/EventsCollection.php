@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Collections;
+namespace WiderFunnel\OptimizelyX\Collections;
 
-use GrowthOptimized\OptimizelyX\Items\Event;
+use WiderFunnel\OptimizelyX\Items\Event;
 
 /**
  * Class ResultCollection
- * @package GrowthOptimized\Collections
+ * @package WiderFunnel\Collections
  */
 class EventsCollection extends CollectionAbstract
 {

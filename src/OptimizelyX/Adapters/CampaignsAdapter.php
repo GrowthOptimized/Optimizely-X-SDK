@@ -1,13 +1,13 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\CampaignsCollection;
-use GrowthOptimized\OptimizelyX\Items\Campaign;
+use WiderFunnel\OptimizelyX\Collections\CampaignsCollection;
+use WiderFunnel\OptimizelyX\Items\Campaign;
 
 /**
  * Class CampaignsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class CampaignsAdapter extends AdapterAbstract
 {

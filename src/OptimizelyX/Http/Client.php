@@ -1,6 +1,6 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Http;
+namespace WiderFunnel\OptimizelyX\Http;
 
 use GuzzleHttp\Client as BaseClient;
 use Psr\Http\Message\ResponseInterface;
@@ -9,7 +9,7 @@ use Psr\Http\Message\UriInterface;
 
 /**
  * Class HttpClient
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class Client extends BaseClient
 {

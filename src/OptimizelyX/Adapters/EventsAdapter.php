@@ -1,14 +1,14 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\EventsCollection;
-use GrowthOptimized\OptimizelyX\Items\Event;
+use WiderFunnel\OptimizelyX\Collections\EventsCollection;
+use WiderFunnel\OptimizelyX\Items\Event;
 use GuzzleHttp\ClientInterface;
 
 /**
  * Class GoalsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class EventsAdapter extends AdapterAbstract
 {

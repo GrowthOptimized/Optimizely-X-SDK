@@ -1,20 +1,20 @@
 <?php
 
-namespace GrowthOptimized;
+namespace WiderFunnel;
 
-use GrowthOptimized\OptimizelyX\Adapters\AttributesAdapter;
-use GrowthOptimized\OptimizelyX\Adapters\AudiencesAdapter;
-use GrowthOptimized\OptimizelyX\Adapters\CampaignsAdapter;
-use GrowthOptimized\OptimizelyX\Adapters\EventsAdapter;
-use GrowthOptimized\OptimizelyX\Adapters\ExperimentsAdapter;
-use GrowthOptimized\OptimizelyX\Adapters\PagesAdapter;
-use GrowthOptimized\OptimizelyX\Adapters\ProjectsAdapter;
-use GrowthOptimized\OptimizelyX\Http\Client;
+use WiderFunnel\OptimizelyX\Adapters\AttributesAdapter;
+use WiderFunnel\OptimizelyX\Adapters\AudiencesAdapter;
+use WiderFunnel\OptimizelyX\Adapters\CampaignsAdapter;
+use WiderFunnel\OptimizelyX\Adapters\EventsAdapter;
+use WiderFunnel\OptimizelyX\Adapters\ExperimentsAdapter;
+use WiderFunnel\OptimizelyX\Adapters\PagesAdapter;
+use WiderFunnel\OptimizelyX\Adapters\ProjectsAdapter;
+use WiderFunnel\OptimizelyX\Http\Client;
 use GuzzleHttp\ClientInterface;
 
 /**
  * Class Optimizely
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class OptimizelyX
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace GrowthOptimized\Tests\v1;
+namespace WiderFunnel\Tests\v1;
 
-use GrowthOptimized\Tests\TestCase;
+use WiderFunnel\Tests\TestCase;
 
 /**
  * Class PagesTest
@@ -15,13 +15,13 @@ class PagesTest extends TestCase
     {
         $client = $this->fakeClient('pages/pages');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         
         $pages = $optimizely->project('1')->pages()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\PagesCollection::class, $pages);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\PagesCollection::class, $pages);
         $this->assertObjectHasAttribute('items', $pages);
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $pages->first());
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Page::class, $pages->first());
         $this->assertObjectHasAttribute('id', $pages->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/pages'), $pages->toJson());
     }
@@ -31,10 +31,10 @@ class PagesTest extends TestCase
     {
         $client = $this->fakeClient('pages/page');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $page = $optimizely->page('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $page);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Page::class, $page);
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/page'), $page->toJson());
     }
 
@@ -43,7 +43,7 @@ class PagesTest extends TestCase
     {
         $client = $this->fakeClient('pages/page');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
 
        	$page = $optimizely->project('1')->pages()->create(
        					'my test page', 
@@ -51,7 +51,7 @@ class PagesTest extends TestCase
        					['category' => 'article']
        				);
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $page);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Page::class, $page);
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/page'), $page->toJson());
     }
 
@@ -60,10 +60,10 @@ class PagesTest extends TestCase
     {
         $client = $this->fakeClient('pages/page');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $page = $optimizely->page('1')->update(['name' => 'my updated name']);
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Page::class, $page);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Page::class, $page);
         $this->assertJsonStringEqualsJsonFile($this->getStub('pages/page'), $page->toJson());
     }
 
@@ -72,7 +72,7 @@ class PagesTest extends TestCase
     {
         $client = $this->fakeClient('pages/page');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $page = $optimizely->page('1')->delete();
 
         $this->assertTrue($page);

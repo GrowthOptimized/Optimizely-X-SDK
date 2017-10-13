@@ -1,8 +1,8 @@
 <?php
 
-namespace GrowthOptimized\Tests\v1;
+namespace WiderFunnel\Tests\v1;
 
-use GrowthOptimized\Tests\TestCase;
+use WiderFunnel\Tests\TestCase;
 
 /**
  * Class ProjectsTest
@@ -14,12 +14,12 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/projects');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $projects = $optimizely->projects()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\ProjectCollection::class, $projects);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\ProjectCollection::class, $projects);
         $this->assertObjectHasAttribute('items', $projects);
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Project::class, $projects->first());
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Project::class, $projects->first());
         $this->assertObjectHasAttribute('id', $projects->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('projects/projects'), $projects->toJson());
     }
@@ -29,10 +29,10 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $project = $optimizely->projects()->find('1');
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Project::class, $project);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Project::class, $project);
         $this->assertJsonStringEqualsJsonFile($this->getStub('projects/project'), $project->toJson());
     }
 
@@ -41,10 +41,10 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $project = $optimizely->projects()->create('My even newer project name');
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Project::class, $project);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Project::class, $project);
         $this->assertJsonStringEqualsJsonFile($this->getStub('projects/project'), $project->toJson());
     }
 
@@ -53,10 +53,10 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $project = $optimizely->project('1')->update(['project_name' => 'My even newer project name']);
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Project::class, $project);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Project::class, $project);
         $this->assertJsonStringEqualsJsonFile($this->getStub('projects/project'), $project->toJson());
     }
 
@@ -65,10 +65,10 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $project = $optimizely->project('1')->activate();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Project::class, $project);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Project::class, $project);
         $this->assertJsonStringEqualsJsonFile($this->getStub('projects/project'), $project->toJson());
     }
 
@@ -77,10 +77,10 @@ class ProjectsTest extends TestCase
     {
         $client = $this->fakeClient('projects/project');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $project = $optimizely->project('1')->archive();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Project::class, $project);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Project::class, $project);
         $this->assertJsonStringEqualsJsonFile($this->getStub('projects/project'), $project->toJson());
     }
 }

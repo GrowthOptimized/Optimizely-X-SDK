@@ -1,14 +1,14 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\ExperimentCollection;
-use GrowthOptimized\OptimizelyX\Collections\ResultCollection;
-use GrowthOptimized\OptimizelyX\Items\Experiment;
+use WiderFunnel\OptimizelyX\Collections\ExperimentCollection;
+use WiderFunnel\OptimizelyX\Collections\ResultCollection;
+use WiderFunnel\OptimizelyX\Items\Experiment;
 
 /**
  * Class ExperimentsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class ExperimentsAdapter extends AdapterAbstract
 {

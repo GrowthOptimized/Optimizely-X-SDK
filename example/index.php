@@ -1,7 +1,7 @@
 <?php
 
 use Dotenv\Dotenv;
-use GrowthOptimized\OptimizelyX;
+use WiderFunnel\OptimizelyX;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
