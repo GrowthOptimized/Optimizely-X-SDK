@@ -171,12 +171,12 @@ class ExperimentsTest extends TestCase
 
         $optimizely = new \WiderFunnel\OptimizelyX($client);
         $results = $optimizely->experiment('1')->results();
-
-        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\ResultCollection::class, $results);
-        $this->assertObjectHasAttribute('items', $results);
-        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Result::class, $results->first());
-        $this->assertObjectHasAttribute('variation_id', $results->first());
-        $this->assertJsonStringEqualsJsonFile($this->getStub('results/results'), $results->toJson());
+        
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Results::class, $results);
+        $this->assertObjectHasAttribute('start_time', $results);
+        $this->assertObjectHasAttribute('end_time', $results);
+        $this->assertObjectHasAttribute('metrics', $results);
+        // $this->assertJsonStringEqualsJsonFile($this->getStub('results/results'), $results->toJson());
     }
 
 }

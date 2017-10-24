@@ -3,7 +3,7 @@
 namespace WiderFunnel\OptimizelyX\Adapters;
 
 use WiderFunnel\OptimizelyX\Collections\ExperimentCollection;
-use WiderFunnel\OptimizelyX\Collections\ResultCollection;
+use WiderFunnel\OptimizelyX\Items\Results;
 use WiderFunnel\OptimizelyX\Items\Experiment;
 
 /**
@@ -156,7 +156,7 @@ class ExperimentsAdapter extends AdapterAbstract
     {
         $response = $this->client->get("experiments/{$this->getResourceId()}/results");
 
-        return ResultCollection::createFromJson($response->getBody()->getContents());
+        return Results::createFromJson($response->getBody()->getContents());
     }
 
     /**

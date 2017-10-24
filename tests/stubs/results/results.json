@@ -1,42 +1,361 @@
-[
-    {
-        "variation_id": "925781903",
-        "variation_name": "My Variation",
-        "goal_id": 820360058,
-        "goal_name": "Engagement",
-        "baseline_id": "924521605",
-        "begin_time": "2014-07-25T20:30:00Z",
-        "end_time": "2014-07-25T20:38:09Z",
-        "visitors": 853,
-        "conversions": 204,
-        "conversion_rate": 0.239,
-        "status": "inconclusive",
-        "improvement": 0.014,
-        "statistical_significance": 0.631,
-        "difference": 0.014,
-        "difference_confidence_interval_min": 0.008,
-        "difference_confidence_interval_max": 0.020,
-        "visitors_until_statistically_significant": 100,
-        "is_revenue": false
+{
+  "confidence_threshold": 0.9,
+  "end_time": "2017-10-24T21:00:00.000000Z",
+  "experiment_id": 8734593686,
+  "metrics": [{
+      "aggregator": "sum",
+      "field": "revenue",
+      "name": "Overall Revenue",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "value": 25.405616161616162,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 26141.56,
+          "samples": 25,
+          "value": 653539.0,
+          "variance": 4183997679.2063994,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 990.0,
+          "samples": 6,
+          "value": 5940.0,
+          "variance": 4900500.0,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
     },
     {
-        "variation_id": "924521605",
-        "variation_name": "Original",
-        "goal_id": 820360058,
-        "goal_name": "Engagement",
-        "baseline_id": "924521605",
-        "begin_time": "2014-07-25T20:30:00Z",
-        "end_time": "2014-07-25T20:38:09Z",
-        "visitors": 841,
-        "conversions": 189,
-        "conversion_rate": 0.225,
-        "status": "baseline",
-        "improvement": 0,
-        "statistical_significance": 0,
-        "difference": 0,
-        "difference_confidence_interval_min": 0,
-        "difference_confidence_interval_max": 0,
-        "visitors_until_statistically_significant": 100,
-        "is_revenue": false
+      "aggregator": "unique",
+      "event_id": 8848430011,
+      "name": "converted",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "value": 0.9200000000000002,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.32,
+          "samples": 25,
+          "value": 8.0,
+          "variance": 0.2176,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.16666666666666666,
+          "samples": 6,
+          "value": 1.0,
+          "variance": 0.1388888888888889,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8890731187,
+      "name": "billing_page_upgrade",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "value": 1.6400000000000001,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.44,
+          "samples": 25,
+          "value": 11.0,
+          "variance": 0.24640000000000004,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.16666666666666666,
+          "samples": 6,
+          "value": 1.0,
+          "variance": 0.1388888888888889,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8895471591,
+      "name": "plan_type_basic_purchased",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "worse",
+            "significance": 0.0,
+            "value": -0.28,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.12,
+          "samples": 25,
+          "value": 3.0,
+          "variance": 0.1056,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.16666666666666666,
+          "samples": 6,
+          "value": 1.0,
+          "variance": 0.1388888888888889,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8906770799,
+      "name": "plan_type_pro_purchased",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.08,
+          "samples": 25,
+          "value": 2.0,
+          "variance": 0.0736,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.0,
+          "samples": 6,
+          "value": 0.0,
+          "variance": 0.0,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8902201329,
+      "name": "plan_type_full_service_purchased",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.16,
+          "samples": 25,
+          "value": 4.0,
+          "variance": 0.1344,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.0,
+          "samples": 6,
+          "value": 0.0,
+          "variance": 0.0,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8892712721,
+      "name": "payment_month_selected",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.08,
+          "samples": 25,
+          "value": 2.0,
+          "variance": 0.0736,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.0,
+          "samples": 6,
+          "value": 0.0,
+          "variance": 0.0,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8892833018,
+      "name": "payment_semi_annual_selected",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "worse",
+            "significance": 0.0,
+            "value": -0.28,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.12,
+          "samples": 25,
+          "value": 3.0,
+          "variance": 0.1056,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.16666666666666666,
+          "samples": 6,
+          "value": 1.0,
+          "variance": 0.1388888888888889,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8894881512,
+      "name": "payment_annual_selected",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.12,
+          "samples": 25,
+          "value": 3.0,
+          "variance": 0.1056,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.0,
+          "samples": 6,
+          "value": 0.0,
+          "variance": 0.0,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 8897882394,
+      "name": "pay_as_you_go_selected",
+      "results": {
+        "8730353762": {
+          "is_baseline": false,
+          "level": "variation",
+          "lift": {
+            "is_significant": false,
+            "lift_status": "better",
+            "significance": 0.0,
+            "visitors_remaining": 9223372036854775807
+          },
+          "rate": 0.12,
+          "samples": 25,
+          "value": 3.0,
+          "variance": 0.1056,
+          "variation_id": "8730353762"
+        },
+        "8751133985": {
+          "is_baseline": true,
+          "level": "variation",
+          "rate": 0.0,
+          "samples": 6,
+          "value": 0.0,
+          "variance": 0.0,
+          "variation_id": "8751133985"
+        }
+      },
+      "scope": "visitor",
+      "winning_direction": "increasing"
     }
-]
+  ],
+  "reach": {
+    "baseline_count": 6,
+    "baseline_reach": 0.1935483870967742,
+    "total_count": 31,
+    "treatment_count": 25,
+    "treatment_reach": 0.8064516129032258,
+    "variations": {
+      "8751133985": {
+        "count": 6,
+        "variation_id": "8751133985",
+        "variation_reach": 0.1935483870967742
+      },
+      "8730353762": {
+        "count": 25,
+        "variation_id": "8730353762",
+        "variation_reach": 0.8064516129032258
+      }
+    }
+  },
+  "start_time": "2017-10-03T20:33:24.000000Z"
+}
