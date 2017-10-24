@@ -2,8 +2,7 @@
   "confidence_threshold": 0.9,
   "end_time": "2017-10-24T21:00:00.000000Z",
   "experiment_id": 8734593686,
-  "metrics": [
-    {
+  "metrics": [{
       "aggregator": "sum",
       "field": "revenue",
       "name": "Overall Revenue",
