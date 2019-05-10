@@ -1,19 +1,19 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\ProjectCollection;
-use GrowthOptimized\OptimizelyX\Items\Project;
+use WiderFunnel\OptimizelyX\Collections\ProjectCollection;
+use WiderFunnel\OptimizelyX\Items\Project;
 
 /**
  * Class ProjectsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class ProjectsAdapter extends AdapterAbstract
 {
-    // /**
-    //  * @return mixed
-    //  */
+    /**
+     * @return mixed
+     */
     public function all()
     {
         $response = $this->client->get('projects');
@@ -35,9 +35,9 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
-     * @param $project_name
+     * @param string $name
      * @param array $attributes
-     * @return Project
+     * @return \WiderFunnel\OptimizelyX\Items\Project
      */
     public function create(string $name, array $attributes = [])
     {
@@ -120,7 +120,7 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
-     * @param $audienceId
+     * @param $eventId
      * @return EventsAdapter
      */
     public function event($eventId)
@@ -129,12 +129,10 @@ class ProjectsAdapter extends AdapterAbstract
     }
 
     /**
-     * @param $projectId
      * @return mixed
      */
     public function attributes()
     {
         return new AttributesAdapter($this->client, $this->getResourceId());
     }
-
 }

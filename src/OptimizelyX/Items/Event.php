@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Items;
+namespace WiderFunnel\OptimizelyX\Items;
 
 /**
  * Class Event
- * @package GrowthOptimized\Items;
+ * @package WiderFunnel\Items;
  */
 class Event extends ItemAbstract
 {
-
+    //
 }

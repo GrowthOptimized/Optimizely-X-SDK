@@ -1,13 +1,13 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Items;
+namespace WiderFunnel\OptimizelyX\Items;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
 /**
  * Class ItemAbstract
- * @package GrowthOptimized\Items
+ * @package WiderFunnel\Items
  */
 abstract class ItemAbstract implements Arrayable, Jsonable
 {
@@ -64,5 +64,4 @@ abstract class ItemAbstract implements Arrayable, Jsonable
 
         return $data;
     }
-
 }

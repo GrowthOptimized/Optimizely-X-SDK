@@ -1,20 +1,22 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Http;
+namespace WiderFunnel\OptimizelyX\Http;
 
 use GuzzleHttp\Client as BaseClient;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Class HttpClient
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class Client extends BaseClient
 {
     /**
      * @param $endpoint
      * @return \Psr\Http\Message\ResponseInterface
+     * @internal param $endpoint
      */
     public function get($endpoint)
     {
@@ -27,7 +29,7 @@ class Client extends BaseClient
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function post($endpoint, $options)
-    {   
+    {
         return $this->call('POST', $endpoint, $options);
     }
 
@@ -50,16 +52,19 @@ class Client extends BaseClient
         return $this->call('DELETE', $endpoint);
     }
 
-
     /**
-     * @param $endpoint, $method, $options
-     *
-    */
+     * @param $method
+     * @param $endpoint
+     * @param array $options
+     * @return mixed|null|\Psr\Http\Message\ResponseInterface
+     */
     public function call($method, $endpoint, array $options = [])
     {
         try {
-            $response = $this->request($method, $endpoint, ['body' => json_encode($options)]);
-        } catch(RequestException $exception) {
+            $response = $this->request($method, $endpoint, [
+                'body' => count($options) > 0 ? json_encode($options) : json_encode(new \stdClass)
+            ]);
+        } catch (RequestException $exception) {
             $response = $exception->getResponse();
         }
 

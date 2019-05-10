@@ -1,8 +1,8 @@
 <?php
 
-namespace GrowthOptimized\Tests\v1;
+namespace WiderFunnel\Tests\v1;
 
-use GrowthOptimized\Tests\TestCase;
+use WiderFunnel\Tests\TestCase;
 
 /**
  * Class CampaignTest
@@ -15,13 +15,13 @@ class CampaignTest extends TestCase
     {
         $client = $this->fakeClient('campaigns/campaigns');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         
         $campaigns = $optimizely->project('1')->campaigns()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\CampaignsCollection::class, $campaigns);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\CampaignsCollection::class, $campaigns);
         $this->assertObjectHasAttribute('items', $campaigns);
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaigns->first());
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Campaign::class, $campaigns->first());
         $this->assertObjectHasAttribute('id', $campaigns->first());
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaigns'), $campaigns->toJson());
     }
@@ -31,10 +31,10 @@ class CampaignTest extends TestCase
     {
         $client = $this->fakeClient('campaigns/campaign');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $campaign = $optimizely->campaign('1')->find();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaign);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Campaign::class, $campaign);
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaign'), $campaign->toJson());
     }
 
@@ -43,14 +43,14 @@ class CampaignTest extends TestCase
     {
         $client = $this->fakeClient('campaigns/campaign');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
 
        	$campaign = $optimizely->project('1')->campaigns()->create(
     					'Landing Page Optimization', 
     					["status" => "not_started"]
 					);
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaign);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Campaign::class, $campaign);
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaign'), $campaign->toJson());
     }
 
@@ -59,12 +59,12 @@ class CampaignTest extends TestCase
     {
         $client = $this->fakeClient('campaigns/campaign');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $campaign = $optimizely->campaign('1')->update([
     					'name' => 'this is my new campaign'
 					]);
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Items\Campaign::class, $campaign);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Items\Campaign::class, $campaign);
         $this->assertJsonStringEqualsJsonFile($this->getStub('campaigns/campaign'), $campaign->toJson());
     }
 
@@ -73,7 +73,7 @@ class CampaignTest extends TestCase
     {
         $client = $this->fakeClient('campaigns/campaign');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $campaign = $optimizely->experiment('1')->delete();
 
         $this->assertTrue($campaign);

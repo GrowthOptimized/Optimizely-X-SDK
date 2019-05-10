@@ -1,9 +1,9 @@
 <?php
 
-namespace GrowthOptimized\Tests\v1;
+namespace WiderFunnel\Tests\v1;
 
-use GrowthOptimized\Tests\TestCase;
-use GrowthOptimized\OptimizelyX\Items\Event;
+use WiderFunnel\Tests\TestCase;
+use WiderFunnel\OptimizelyX\Items\Event;
 
 /**
  * Class GoalsTest
@@ -15,10 +15,10 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/events');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goals = $optimizely->project('1')->events()->all();
 
-        $this->assertInstanceOf(\GrowthOptimized\OptimizelyX\Collections\EventsCollection::class, $goals);
+        $this->assertInstanceOf(\WiderFunnel\OptimizelyX\Collections\EventsCollection::class, $goals);
         $this->assertObjectHasAttribute('items', $goals);
         $this->assertInstanceOf(Event::class, $goals->first());
         $this->assertObjectHasAttribute('id', $goals->first());
@@ -30,7 +30,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goal = $optimizely->event('1')->find();
 
         $this->assertInstanceOf(Event::class, $goal);
@@ -42,7 +42,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         
         $goal = $optimizely->page('1')->events()->create(
            'my sign up goal', 
@@ -60,7 +60,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goal = $optimizely->project('1')->events()->create([
                     'event_type' => 'custom',
                     'name' => 'my custom event',
@@ -76,7 +76,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goal = $optimizely->page('1')->event('1')->update([
                     'name' => 'my new page event name'
                 ]);
@@ -90,7 +90,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goal = $optimizely->project('1')->event('1')->update([
                     'name' => 'my new custom event name'
                 ]);
@@ -104,7 +104,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goal = $optimizely->page('1')->event('1')->delete();
 
         $this->assertTrue($goal);
@@ -115,7 +115,7 @@ class EventsTest extends TestCase
     {
         $client = $this->fakeClient('events/event');
 
-        $optimizely = new \GrowthOptimized\OptimizelyX($client);
+        $optimizely = new \WiderFunnel\OptimizelyX($client);
         $goal = $optimizely->project('1')->event('1')->delete();
 
         $this->assertTrue($goal);

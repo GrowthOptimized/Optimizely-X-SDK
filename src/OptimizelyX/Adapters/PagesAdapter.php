@@ -1,19 +1,16 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Adapters\EventsAdapter;
-
-use GrowthOptimized\OptimizelyX\Collections\PagesCollection;
-use GrowthOptimized\OptimizelyX\Items\Page;
+use WiderFunnel\OptimizelyX\Collections\PagesCollection;
+use WiderFunnel\OptimizelyX\Items\Page;
 
 /**
  * Class GoalsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class PagesAdapter extends AdapterAbstract
 {
-
     /**
      * @return mixed
      */
@@ -46,7 +43,6 @@ class PagesAdapter extends AdapterAbstract
      */
     public function find()
     {
-
         $response = $this->client->get("pages/{$this->getResourceId()}");
 
         return Page::createFromJson($response->getBody()->getContents());
@@ -74,7 +70,7 @@ class PagesAdapter extends AdapterAbstract
     }
 
     /**
-     * @param $audienceId
+     * @param $eventId
      * @return AudiencesAdapter
      */
     public function event($eventId = null)
@@ -83,11 +79,11 @@ class PagesAdapter extends AdapterAbstract
     }
 
     /**
-     * @return EventsAdapter
+     * @param null $eventId
+     * @return \WiderFunnel\OptimizelyX\Adapters\EventsAdapter
      */
     public function events($eventId = null)
     {
         return new EventsAdapter($this->client, $this->getResourceId(), $eventId, 'in-page');
     }
-
 }

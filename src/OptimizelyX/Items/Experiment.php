@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Items;
+namespace WiderFunnel\OptimizelyX\Items;
 
 /**
  * Class Experiment
- * @package GrowthOptimized\Items;
+ * @package WiderFunnel\Items;
  */
 class Experiment extends ItemAbstract
 {
-
+    //
 }

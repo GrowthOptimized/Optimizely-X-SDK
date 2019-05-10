@@ -3,10 +3,10 @@
 namespace WiderFunnel\OptimizelyX\Items;
 
 /**
- * Class Campaign
+ * Class Result
  * @package WiderFunnel\Items;
  */
-class Campaign extends ItemAbstract
+class Results extends ItemAbstract
 {
     //
 }

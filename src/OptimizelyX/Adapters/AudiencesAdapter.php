@@ -1,23 +1,21 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\AudienceCollection;
-use GrowthOptimized\OptimizelyX\Items\Audience;
+use WiderFunnel\OptimizelyX\Collections\AudienceCollection;
+use WiderFunnel\OptimizelyX\Items\Audience;
 
 /**
  * Class AudiencesAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class AudiencesAdapter extends AdapterAbstract
 {
-
     /**
      * @return mixed
      */
     public function all()
     {
-
         $response = $this->client->get("audiences?project_id={$this->getResourceId()}");
 
         return AudienceCollection::createFromJson($response->getBody()->getContents());
@@ -42,7 +40,6 @@ class AudiencesAdapter extends AdapterAbstract
 
 
     /**
-     * @param $audienceId
      * @return static
      */
     public function find()
@@ -62,5 +59,4 @@ class AudiencesAdapter extends AdapterAbstract
 
         return Audience::createFromJson($response->getBody()->getContents());
     }
-
 }

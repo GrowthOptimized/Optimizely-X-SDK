@@ -1,12 +1,12 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Collections;
+namespace WiderFunnel\OptimizelyX\Collections;
 
-use GrowthOptimized\OptimizelyX\Items\Experiment;
+use WiderFunnel\OptimizelyX\Items\Experiment;
 
 /**
  * Class ExperimentCollection
- * @package GrowthOptimized\Collections
+ * @package WiderFunnel\Collections
  */
 class ExperimentsCollection extends CollectionAbstract
 {

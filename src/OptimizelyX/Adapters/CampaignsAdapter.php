@@ -1,24 +1,21 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\CampaignsCollection;
-use GrowthOptimized\OptimizelyX\Items\Campaign;
-
+use WiderFunnel\OptimizelyX\Collections\CampaignsCollection;
+use WiderFunnel\OptimizelyX\Items\Campaign;
 
 /**
  * Class CampaignsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class CampaignsAdapter extends AdapterAbstract
 {
-
     /**
      * @return mixed
      */
     public function all()
     {
-
         $response = $this->client->get("campaigns?project_id={$this->getResourceId()}");
 
         return CampaignsCollection::createFromJson($response->getBody()->getContents());
@@ -62,6 +59,7 @@ class CampaignsAdapter extends AdapterAbstract
     }
 
     /**
+     * @param array $attributes
      * @return static
      */
     public function update($attributes = [])
@@ -80,5 +78,4 @@ class CampaignsAdapter extends AdapterAbstract
 
         return $this->booleanResponse($response);
     }
-
 }

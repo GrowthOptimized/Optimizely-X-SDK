@@ -1,18 +1,17 @@
 <?php
 
-namespace GrowthOptimized\OptimizelyX\Adapters;
+namespace WiderFunnel\OptimizelyX\Adapters;
 
-use GrowthOptimized\OptimizelyX\Collections\EventsCollection;
-use GrowthOptimized\OptimizelyX\Items\Event;
+use WiderFunnel\OptimizelyX\Collections\EventsCollection;
+use WiderFunnel\OptimizelyX\Items\Event;
 use GuzzleHttp\ClientInterface;
 
 /**
  * Class GoalsAdapter
- * @package GrowthOptimized
+ * @package WiderFunnel
  */
 class EventsAdapter extends AdapterAbstract
 {
-
     /**
      * @var
      */
@@ -27,6 +26,8 @@ class EventsAdapter extends AdapterAbstract
      * Optimizely constructor.
      * @param ClientInterface $client , $id, $parentId, $eventId
      * @param null $id
+     * @param null $eventId
+     * @param null $eventType
      */
     public function __construct(ClientInterface $client, $id = null, $eventId = null, $eventType = null)
     {
@@ -57,25 +58,19 @@ class EventsAdapter extends AdapterAbstract
 
     /**
      * @param string $name
-     * @param string $edit_url
+     * @param string|null $event_type
+     * @param array|null $config
      * @param array $attributes
      * @return static
      */
     public function create($name, string $event_type = null, array $config = null, $attributes = [])
     {
-
         if ($this->eventType == 'in-page') {
-
             $attributes = array_merge($attributes, compact('name', 'event_type', 'config'));
-
             $response = $this->client->post("pages/{$this->getResourceId()}/events", $attributes);
-
         } else {
-
             $attributes = $name;
-
             $response = $this->client->post("projects/{$this->getResourceId()}/custom_events", $attributes);
-
         }
 
         return Event::createFromJson($response->getBody()->getContents());
@@ -88,37 +83,28 @@ class EventsAdapter extends AdapterAbstract
     public function update(array $attributes)
     {
         if ($this->eventType == 'in-page') {
-
             $response = $this->client->patch("pages/{$this->getResourceId()}/events/{$this->eventId}", $attributes);
-
         } else {
-
-            $response = $this->client->patch("projects/{$this->getResourceId()}/custom_events/{$this->eventId}",
-                $attributes);
-
+            $response = $this->client->patch(
+                "projects/{$this->getResourceId()}/custom_events/{$this->eventId}",
+                $attributes
+            );
         }
 
         return Event::createFromJson($response->getBody()->getContents());
-
     }
 
-    // /**
-    // * @return static
-    // */
+    /**
+     * @return static
+     */
     public function delete()
     {
-
         if ($this->eventType == 'in-page') {
-
             $response = $this->client->delete("pages/{$this->getResourceId()}/events/{$this->eventId}");
-
         } else {
-
             $response = $this->client->delete("projects/{$this->getResourceId()}/custom_events/{$this->eventId}");
-
         }
 
         return $this->booleanResponse($response);
     }
-
 }
