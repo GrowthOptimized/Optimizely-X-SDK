@@ -18,9 +18,27 @@ class ExperimentsAdapter extends AdapterAbstract
     /**
      * @return mixed
      */
-    public function all()
+    public function all(array $attributes = [])
     {
-        $response = $this->client->get("experiments?project_id={$this->getResourceId()}");
+
+        $url = "experiments?project_id={$this->getResourceId()}";
+
+        if (array_key_exists('per_page', $attributes))
+        {
+            $url."&per_page={$attributes["per_page"]}";
+        }
+
+        if (array_key_exists('page', $attributes))
+        {
+          $url."&page={$attributes["page"]}";
+        }
+
+        if (array_key_exists('include_classic', $attributes))
+        {
+          $url."&include_classic={$attributes["include_classic"]}";
+        }
+
+        $response = $this->client->get($url);
 
         return ExperimentCollection::createFromJson($response->getBody()->getContents());
     }

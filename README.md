@@ -14,13 +14,13 @@ composer require growthoptimized/optimizely-x-sdk
 
 ## Usage
 
-Simply create an Optimizely object, with a valid OAuth Token in the constructor: 
+Simply create an Optimizely object, with a valid OAuth Token in the constructor:
 
 ```php
 $optimizely = Optimizely::create($token);
 ```
 
-If you wish to use the token based authentication, simply pass `true` as a second argument: 
+If you wish to use the token based authentication, simply pass `true` as a second argument:
 
 ```php
 $optimizely = Optimizely::create($token, true);
@@ -88,12 +88,12 @@ Create Campaign
 
 ```php
 $optimizely->project($projectId)->campaigns()->create(
-    'Landing Page Optimization', 
+    'Landing Page Optimization',
     ["status" => "not_started"]
 );
 ```
 
-Update a Campaign 
+Update a Campaign
 
 ```php
 $optimizely->campaign($campaignId)->update([
@@ -106,10 +106,14 @@ $optimizely->campaign($campaignId)->update([
 List experiments in project
 
 ```php
-$optimizely->project($projectId)->experiments()->all();
+$optimizely->project($projectId)->experiments()->all([
+    'per_page' => <integer>,
+    'page' => <integer>,
+    'include_classic' => <boolean>
+] <optional>);
 ```
 
-Find experiment 
+Find experiment
 
 ```php
 $optimizely->experiment($experimentId)->find();
@@ -119,7 +123,7 @@ Create an experiment
 
 ```php
 $optimizely->project($projectId)->experiments()->create(
-    'my test', 
+    'my test',
     [
         [
             "name" => "control",
@@ -200,9 +204,9 @@ $optimizely->audience($audienceId)->find();
 
 Create an audience
 
-```php 
+```php
 $optimizely->project($projectId)->audiences()->create(
-    'My second audience', 
+    'My second audience',
     '[\"and\", {\"type\": \"language\", \"value\": \"es\"}, {\"type\": \"location\", \"value\": \"US-CA-SANFRANCISCO\"}]',
     ["description" => 'People that speak spanish in San Fran']
 );
@@ -248,7 +252,7 @@ Update a page
 $optimizely->page($pageId)->update(['name' => 'my updated name']);
 ```
 
-Delete a page 
+Delete a page
 
 ```php
 $optimizely->page($pageId)->delete();
@@ -274,8 +278,8 @@ Create In-page Event
 
 ```php
 $optimizely->page($pageId)->events()->create(
-    'my sign up goal', 
-    'click', 
+    'my sign up goal',
+    'click',
     ['selector' => '.sign-up-btn'],
     ['category' => 'sign_up']
 );
