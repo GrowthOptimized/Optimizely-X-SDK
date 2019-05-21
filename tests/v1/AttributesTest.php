@@ -1,5 +1,6 @@
 <?php
 
+
 namespace WiderFunnel\Tests\v1;
 
 use WiderFunnel\Tests\TestCase;
